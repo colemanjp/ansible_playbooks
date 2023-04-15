@@ -1,0 +1,26 @@
+---
+
+- name: Fedora install fail2ban packages
+  become: yes
+  dnf:
+    name:
+    - fail2ban
+    state: installed
+  when: ansible_distribution == 'Fedora'
+
+- name: Enable fail2ban and start it
+  ansible.builtin.service:
+    name: fail2ban
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Fedora'
+
+- name: fail2ban jail.local update
+  become: yes
+  template: src=etc/fail2ban/jail.local.j2
+    dest=/etc/fail2ban/jail.local
+    backup=no
+    owner=0 group=0 mode=0444
+  notify:
+  - restart fail2ban
+  when: ansible_distribution == 'Fedora'

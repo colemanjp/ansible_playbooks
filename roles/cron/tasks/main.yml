@@ -1,0 +1,14 @@
+---
+
+- name: Enable service crond and start it
+  ansible.builtin.service:
+    name: crond
+    enabled: yes
+    state: started
+
+- name: "anacron for {{ myuser }}"
+  ansible.builtin.cron:
+    name: "anacron"
+    minute: "57"
+    job: "/usr/sbin/anacron -t $HOME/.anacron/etc/anacrontab -S $HOME/.anacron/var/spool/anacron"
+    user: "{{ myuser }}"

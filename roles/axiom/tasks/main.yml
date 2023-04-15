@@ -1,0 +1,186 @@
+---
+- name: Debian install packages
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - syncthing 
+        - stow
+        - ncat
+        - neovim
+        - xsel
+        - shellcheck
+        - magic-wormhole
+        - gcc
+        - make
+        - curl
+        - mlocate
+        - whatweb
+        - mutt
+        - mailutils
+        - chromium
+        - firefox-esr
+        - logwatch
+        - expect
+        - python3-q-text-as-data
+        - awscli
+        - wapiti
+        - gobuster
+        - whatweb
+        - python3-venv
+        - jupyter-notebook
+        - sudo
+        - htop
+        - rsync
+        - net-tools
+        - nbtscan
+        - fzf
+        - xauth
+    state: present
+  when: ansible_distribution == 'Debian'
+
+- name: Debian 10 install packages
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - docker.io
+        - docker-compose
+        - python-impacket
+    state: present
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '10'
+
+- name: Debian 11 remove packages
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - docker 
+        - docker-engine 
+        - docker.io 
+        - containerd 
+        - runc 
+        - docker-compose
+    state: absent
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
+
+- name: Debian 11 import the docker apt key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
+
+- name: Debian 11 add the docker apt repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/debian bullseye stable
+    state: present
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
+
+- name: Debian 11 install packages
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - docker-ce 
+        - docker-ce-cli 
+        - containerd.io 
+        - docker-buildx-plugin 
+        - docker-compose-plugin
+        - python3-impacket
+    state: present
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
+
+- name: "Add the user {{ myuser }}"
+  ansible.builtin.user:
+    name: "{{ myuser }}" 
+  when: ansible_distribution == 'Debian'
+
+- name: "Set authorized key for user {{ myuser }} copying it from current user"
+  authorized_key:
+    user: "{{ myuser }}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+  when: ansible_distribution == 'Debian'
+
+- name: "add {{ myuser }} to sudo group and shell /bin/bash"
+  ansible.builtin.user:
+    name: "{{ myuser }}"
+    groups: sudo
+    shell: /bin/bash
+    append: yes
+  when: ansible_distribution == 'Debian'
+
+- name: Create /etc/sudoers.d directory 
+  file: path=/etc/sudoers.d state=directory owner=root group=root mode=0750
+  when: ansible_distribution == 'Debian'
+
+- name: Set sudoers timeout
+  template: src=etc/sudoers.d/timeout.j2
+    dest=/etc/sudoers.d/timeout
+    backup=no
+    owner=0 group=0 mode=0440
+  when: ansible_distribution == 'Debian'
+
+- name: Create Tools directory 
+  file: path="/home/{{ myuser }}/Tools" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
+  when: ansible_distribution == 'Debian'
+
+- name: Manage github tokens in Tools directory
+  template: src="home/myuser/Tools/.github_tokens.j2"
+    dest="/home/{{ myuser }}/Tools/.github_tokens"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when: ansible_distribution == 'Debian'
+
+- name: Create .config/amass directory 
+  file: path="/home/{{ myuser }}/.config/amass" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
+  when: ansible_distribution == 'Debian'
+
+- name: Manage amass config.ini
+  template: src=home/myuser/.config/amass/config.ini.j2
+    dest="/home/{{ myuser }}/.config/amass/config.ini"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when: ansible_distribution == 'Debian'
+
+- name: "Enable service syncthing@{{ myuser }} and start it"
+  ansible.builtin.service:
+    name: "syncthing@{{ myuser }}"
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Debian'
+
+- name: Enable service ssh and start it
+  ansible.builtin.service:
+    name: ssh
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Debian'
+
+- name: Git clone seclists repo
+  become: yes
+  become_user: "{{ myuser }}"
+  git: repo=https://github.com/danielmiessler/SecLists.git dest="/home/{{ myuser }}/seclists"
+  ignore_errors: yes
+  when: ansible_distribution == 'Debian'
+
+- name: Git clone proteus repo
+  become: yes
+  become_user: "{{ myuser }}"
+  git: repo=https://github.com/pry0cc/proteus.git dest="/home/{{ myuser }}/.proteus"
+  ignore_errors: yes
+  when: ansible_distribution == 'Debian'
+
+- name: Git clone reconftw repo
+  become: yes
+  become_user: "{{ myuser }}"
+  git: repo=https://github.com/six2dez/reconftw.git dest="/home/{{ myuser }}/reconftw"
+  ignore_errors: yes
+  when: ansible_distribution == 'Debian'
+
+- name: install reconftw.cfg
+  template: src=home/myuser/reconftw/reconftw.cfg.j2
+    dest="/home/{{ myuser }}/reconftw/reconftw.cfg"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when: ansible_distribution == 'Debian'

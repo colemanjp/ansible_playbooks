@@ -1,0 +1,33 @@
+---
+
+- name: Enable service sendmail and start it
+  ansible.builtin.service:
+    name: sendmail
+    enabled: yes
+    state: started
+
+- name: sendmail configuration file update
+  become: yes
+  template: src=etc/mail/sendmail.mc.{{inventory_hostname}}.j2
+    dest=/etc/mail/sendmail.mc
+    backup=yes
+    owner=0 group=0 mode=0400
+  notify:
+  - restart sendmail
+- name: local-host-names update
+  become: yes
+  template: src=etc/mail/local-host-names.{{inventory_hostname}}.j2
+    dest=/etc/mail/local-host-names
+    backup=yes
+    owner=0 group=0 mode=0444
+  notify:
+  - restart sendmail
+
+- name: sendmail aliases update root
+  ansible.builtin.lineinfile:
+    path: /etc/aliases
+    regexp: '^(.*)root:(.*)'
+    line: "root:{{ myuser }}"
+    backup: yes
+  notify:
+  - newaliases

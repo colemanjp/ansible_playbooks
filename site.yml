@@ -1,0 +1,31 @@
+---
+- hosts: all
+  roles:
+  - common
+
+- hosts: laptops
+  roles:
+  - laptop
+  - logwatch
+  - cron
+  - sendmail
+  - firewalld
+
+- hosts: servers
+  roles:
+  - sendmail
+  - fail2ban
+  - logwatch
+  - firewalld
+
+- hosts: kali
+  roles:
+  - kali
+
+- hosts: axiom
+  roles:
+    - axiom
+
+- hosts: proxmox
+  roles:
+    - proxmox

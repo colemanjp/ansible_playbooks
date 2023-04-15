@@ -1,0 +1,137 @@
+---
+- name: Import the docker apt key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg 
+    state: present
+  when: ansible_distribution == 'Kali'
+
+- name: Add docker apt repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/debian buster stable
+    state: present
+  when: ansible_distribution == 'Kali'
+
+- name: Kali install packages
+  become: yes
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        #- chromium 
+        - zim 
+        - syncthing 
+        - seclists 
+        - sslscan
+        - python3-venv 
+        - python3-pip 
+        - sublist3r 
+        - awscli 
+        - keepassxc 
+        - golang 
+        - gobuster 
+        - oscanner 
+        - sipvicious 
+        - smtp-user-enum 
+        - tnscmd10g 
+        - stow
+        - wkhtmltopdf 
+        - bind9-dnsutils 
+        - dotdotpwn
+        - tor
+        - ncat
+        - telnet
+        - dirsearch
+        - prips
+        - nuclei
+        - ffuf
+        - neovim
+        - jq
+        - fzf 
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-compose
+        - xsel
+        - xdot
+        - subfinder
+        - httprobe
+        - shellcheck
+        - magic-wormhole
+        - feroxbuster
+        - cargo
+        - hakrawler
+        - man-db
+        - snmp-mibs-downloader
+        - geoip-bin
+        - geoipupdate
+        - clamav
+        - clamav-freshclam
+        - ewf-tools
+        - arjun
+        - dnsx
+        - zaproxy
+    state: present
+  when: ansible_distribution == 'Kali'
+
+- name: Add vboxsf group
+  ansible.builtin.group:
+    name: vboxsf
+    state: present
+  when: ansible_distribution == 'Kali'
+
+- name: "Change {{ myuser }} shell to bash and add to kali-trusted and vboxsf groups"
+  ansible.builtin.user:
+    name: "{{ myuser }}" 
+    shell: /bin/bash
+    groups: kali-trusted,vboxsf
+    append: yes
+  when: ansible_distribution == 'Kali'
+
+- name: "create /home/{{ myuser }}/Downloads"
+  become_user: "{{ myuser }}"
+  file:
+    path: "/home/{{ myuser }}/Downloads"
+    state: directory
+    owner: "{{ myuser }}"
+    group: "{{ myuser }}"
+    mode: 0755
+  when: ansible_distribution == 'Kali'
+
+- name: create "/home/{{ myuser }}/reconftw/Recon"
+  become_user: "{{ myuser }}"
+  file:
+    path: "/home/{{ myuser }}/reconftw/Recon"
+    state: directory
+    owner: "{{ myuser }}"
+    group: "{{ myuser }}"
+    mode: 0755
+  when: ansible_distribution == 'Kali'
+
+- name: "Enable service syncthing@{{ myuser }} and start it"
+  ansible.builtin.service:
+    name: "syncthing@{{ myuser }}"
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Kali'
+
+- name: Enable service ssh
+  ansible.builtin.service:
+    name: ssh
+    enabled: yes
+  when: ansible_distribution == 'Kali'
+
+- name: Kali download chromium unstable deb
+  get_url: url=https://github.com/RobRich999/Chromium_Clang/releases/download/v89.0.4376.0-r839848-linux64-deb/chromium-browser-unstable_89.0.4376.0-1_amd64.deb dest="/home/{{ myuser }}/Downloads/"
+  become_user: "{{ myuser }}" 
+  become: yes
+  when: ansible_distribution == 'Kali'
+
+- name: Kali create aquatone directory 
+  file: path="/home/{{ myuser }}/Downloads/aquatone" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0775
+  when: ansible_distribution == 'Kali'
+
+- name: Kali download aquatone
+  get_url: url=https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip dest="/home/{{ myuser }}/Downloads/aquatone/aquatone_linux_amd64_1.7.0.zip" sha256sum=077119d9ccc5e19bb7323a65402aeb4f3460297fb8107efaeeb428e0982fdeac
+  become_user: "{{ myuser }}"
+  become: yes
+  when: ansible_distribution == 'Kali'

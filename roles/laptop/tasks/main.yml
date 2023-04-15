@@ -1,0 +1,309 @@
+- name: Add Virtualbox Repo
+  become: yes
+  yum_repository:
+    name: Virtualbox
+    description: Virtualbox Repo
+    baseurl: http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch
+    gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
+    gpgcheck: 1
+    repo_gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Teams Repo
+  become: yes
+  yum_repository:
+    name: teams
+    description: teams
+    baseurl: https://packages.microsoft.com/yumrepos/ms-teams
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Dropbox Repo
+  become: yes
+  yum_repository:
+    name: dropbox
+    description: Dropbox repo
+    baseurl: https://linux.dropbox.com/fedora/$releasever/
+    gpgkey: https://linux.dropbox.com/fedora/rpm-public-key.asc
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Chrome Repo
+  become: yes
+  yum_repository:
+    name: google-chrome
+    description: google-chrome
+    baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Slack Repo
+  become: yes
+  yum_repository:
+    name: slack
+    description: slack
+    baseurl: https://packagecloud.io/slacktechnologies/slack/fedora/36/x86_64
+    gpgkey: https://slack.com/gpg/slack_pubkey_20210901.gpg
+    gpgcheck: 1
+    enabled: 1
+    sslverify: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Jenkins Repo
+  become: yes
+  yum_repository:
+    name: jenkins
+    description: jenkins
+    baseurl: http://pkg.jenkins.io/redhat
+    gpgkey: https://pkg.jenkins.io/redhat/jenkins.io.key
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Docker Repo
+  become: yes
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+    gpgkey: https://download.docker.com/linux/fedora/gpg
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Install laptop packages
+  become: yes
+  dnf: 
+    name:
+    - kernel-devel
+    - keepassxc
+    - syncthing
+    - gimp
+    - deja-dup
+    - remmina
+    - awesome-vim-colorschemes
+    - Zim
+    - devilspie2
+    - texstudio
+    - recoll
+    - fzf
+    - telnet
+    - vim-X11
+    - gnome-tweaks
+    - dnf-utils
+    - google-chrome-stable
+    - slack
+    - teams
+    - nautilus-dropbox
+    - ike-scan
+    - xsel
+    - shutter
+    - transmission
+    - leafpad
+    - cronie-anacron
+    - jq
+    - unrtf
+    - python-epub
+    - antiword
+    - tesseract
+    - keychain
+    - proxychains-ng
+    - torbrowser-launcher
+    - firewall-config
+    - java-1.8.0-openjdk
+    - java-1.8.0-openjdk-devel
+    - ewftools
+    - evtest
+    - seqdiag
+    - python-xdot
+    - gparted
+    - dconf-editor
+    - timew
+    - seahorse
+    - sleuthkit
+    - libreoffice
+    - whereami
+    - geoclue2-demos 
+    - qt
+    - d-feet
+    - okular
+    - texlive-overpic
+    - texlive-cheatsheet
+    - texlive-libertine
+    - texlive-bigfoot
+    - texlive-mdframed
+    - lshw
+    - python3-csvkit
+    - clamav
+    - clamav-update
+    - cabextract
+    - openldap-clients
+    - cheat 
+    - cheat-bash-completion
+    - gtimelog
+    - miller
+    - dump1090
+    - xrandr
+    - httrack
+    - zmap
+    - masscan
+    - pavucontrol
+    - netcat
+    - wireless-tools
+    - power-profiles-daemon
+    - aws-tools
+    - awscli
+    - gnome-shell-extension-unite
+    - par
+    - gnome-sound-recorder
+    - vagrant
+    - xdotool
+    - konsole 
+    - gnome-extensions-app
+    - banner
+    - playonlinux
+    - hashcat
+    - arc-theme
+    - thunderbird
+    - retext 
+    - gcc-go
+    - golang-bin
+    - ncurses-devel
+    - rtl-sdr-devel
+    - p7zip
+    - wireshark
+    - krita
+    - aspell
+    - krb5-workstation
+    - livecd-iso-to-mediums
+    - i3 
+    - i3status 
+    - dmenu 
+    - i3lock 
+    - xbacklight 
+    - feh 
+    - conky
+    - sslscan
+    - xournal
+    - pandoc
+    - darktable
+    - perl-Archive-Zip
+    - virt-viewer
+    - kleopatra
+    - jenkins
+    - onesixtyone
+    - clearlooks-compact-gnome-theme
+    - gnome-shell-extension-user-theme
+    - sassc
+    - pinta
+    - gthumb
+    - vim-ale
+    - xsane
+    - xsane-gimp
+    - pulseeffects
+    - ripgrep
+    - nbtscan
+    - rust-libdbus-sys-devel
+    - wxGTK-devel
+    - docker-ce 
+    - docker-ce-cli 
+    - containerd.io 
+    - docker-buildx-plugin 
+    - docker-compose-plugin
+    - pass
+    - qrencode
+    - wl-clipboard
+    - xclip
+    state: installed
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: Install keybase key 
+  become: yes
+  rpm_key:
+    key: https://keybase.io/docs/server_security/code_signing_key.asc
+    state: present
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: Install keybase
+  become: yes
+  dnf: 
+    name: https://prerelease.keybase.io/keybase_amd64.rpm
+    state: installed
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: Remove laptop packages
+  become: yes
+  dnf:
+    name:
+    - '@xfce-desktop-environment'
+    - xfce4-whiskermenu-plugin
+    - libxfce4util
+    - libxfce4ui
+    - xfce-polkit
+    - im-chooser-xfce
+    - xfce4-settings
+    - imsettings-xfce
+    - podman-docker
+    autoremove: yes
+    state: absent
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: "Install logseq flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: com.logseq.Logseq
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: "Install VLC flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: org.videolan.VLC
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: "Install handbrake flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: fr.handbrake.ghb
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: "Install makemkv flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: com.makemkv.MakeMKV
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: "Enable service syncthing@{{ myuser }} and start it"
+  ansible.builtin.service:
+    name: "syncthing@{{ myuser }}"
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: "Add {{ myuser }} to vboxusers group"
+  ansible.builtin.user:
+    name: "{{ myuser }}"
+    groups: vboxusers
+    append: yes
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'

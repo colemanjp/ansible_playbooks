@@ -1,0 +1,142 @@
+---
+- name: Fedora install common packages
+  become: yes
+  dnf: 
+    name:
+    - openssl-devel
+    - firewall-config
+    - sendmail
+    - sendmail-cf
+    - sendmail-doc
+    - opendkim
+    - bind-chroot
+    - cyrus-imapd
+    - git
+    - mutt
+    - msmtp
+    - nmap
+    - ftp
+    - nginx
+    - patch
+    - autoconf
+    - automake
+    - bison
+    - gcc-c++ 
+    - libffi-devel 
+    - libtool
+    - readline-devel 
+    - sqlite-devel 
+    - zlib-devel 
+    - glibc-headers 
+    - glibc-devel 
+    - libyaml-devel 
+    - libicu-devel
+    - rsh
+    - stow
+    - sysstat
+    - masscan
+    - dnf-plugin-system-upgrade
+    - unicornscan
+    - aspell-en
+    - openldap-devel
+    - zsh
+    - libxslt-devel
+    - postgresql
+    - postgresql-server
+    - postgresql-contrib
+    - libxml2-devel
+    - libxslt-devel
+    - libxml++-devel
+    - pygobject2-devel
+    - freetype-devel
+    - libjpeg-devel
+    - gtk+-devel
+    - gtk3-devel
+    - gtk2-devel
+    - vte-devel
+    - tmux
+    - nikto
+    - fping
+    - hydra
+    - postgresql-upgrade
+    - fpdns
+    - xsel
+    - net-snmp-utils
+    - openvpn
+    - ruby
+    - letsencrypt
+    - python3-impacket
+    - python3-certbot-nginx
+    - python-virtualenv
+    - python3-selenium
+    - rdesktop
+    - fail2ban
+    - golang-bin
+    - libpcap-devel
+    - magic-wormhole
+    - gobuster
+    - chromium
+    - chromedriver
+    - finger
+    - moreutils
+    - ShellCheck
+    - nfs-utils
+    - zmap
+    - rust
+    - cargo 
+    - ike-scan
+    - xorg-x11-xauth
+    - awscli
+    - dnsx
+    - subfinder
+    - assetfinder
+    - ngrep
+    - wireshark-cli
+    - speedtest-cli
+    - at
+    state: installed
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: Debian install common packages
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - tmux
+        - at
+    state: present
+  when: ansible_distribution == 'Debian'
+
+- name: Debian remove common packages
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - ansible
+    state: absent
+  when: ansible_distribution == 'Debian'
+
+- name: Fedora enable sshd and start it
+  ansible.builtin.service:
+    name: sshd
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Fedora'
+
+- name: Fedora sshd configuration file update
+  become: yes
+  template: src=etc/ssh/sshd_config.fedora.j2
+    dest=/etc/ssh/sshd_config
+    backup=yes
+    owner=0 group=0 mode=0400
+    validate='/usr/sbin/sshd -T -f %s'
+  notify:
+  - restart sshd
+  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+
+- name: "Fedora add {{ myuser }} to wireshark group"
+  ansible.builtin.user:
+    name: "{{ myuser }}"
+    groups: wireshark
+    append: yes
+  when: ansible_distribution == 'Fedora'

@@ -1,0 +1,24 @@
+---
+- name: Fedora install logwatch packages
+  become: yes
+  dnf:
+    name:
+    - logwatch
+    state: installed
+  when: ansible_distribution == 'Fedora'
+
+- name: Logwatch logwatch.conf update
+  become: yes
+  template: src=etc/logwatch/logwatch.conf.j2
+    dest=/etc/logwatch/logwatch.conf
+    backup=no
+    owner=0 group=0 mode=0444
+  when: ansible_distribution == 'Fedora'
+
+- name: Logwatch services/sshd.conf update
+  become: yes
+  template: src=etc/logwatch/scripts/services/sshd.conf.j2
+    dest=/etc/logwatch/scripts/services/sshd.conf
+    backup=no
+    owner=0 group=0 mode=0444
+  when: ansible_distribution == 'Fedora'
