@@ -220,6 +220,7 @@
     - qrencode
     - wl-clipboard
     - xclip
+    - hdparm
     state: installed
   when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
 
@@ -301,9 +302,9 @@
     state: started
   when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
 
-- name: "Add {{ myuser }} to vboxusers group"
+- name: "Add {{ myuser }} to vboxusers and docker groups"
   ansible.builtin.user:
     name: "{{ myuser }}"
-    groups: vboxusers
+    groups: vboxusers,docker
     append: yes
   when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
