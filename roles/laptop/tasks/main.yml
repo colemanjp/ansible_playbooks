@@ -221,6 +221,8 @@
     - wl-clipboard
     - xclip
     - hdparm
+    - kubernetes-client
+    - helm
     state: installed
   when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
 
