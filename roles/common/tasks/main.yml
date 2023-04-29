@@ -145,3 +145,24 @@
   file: path="/home/{{ myuser }}/.aws" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when: 
     - inventory_hostname not in groups["servers"]
+    - inventory_hostname not in groups["kali"]
+
+- name: aws config
+  template: src=home/myuser/.aws/config
+    dest="/home/{{ myuser }}/.aws/config"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when: 
+    - inventory_hostname not in groups["servers"]
+    - inventory_hostname not in groups["kali"]
+
+
+- name: aws credentials
+  template: src=home/myuser/.aws/credentials
+    dest="/home/{{ myuser }}/.aws/credentials"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when: 
+    - inventory_hostname not in groups["servers"]
+    - inventory_hostname not in groups["kali"]
+
