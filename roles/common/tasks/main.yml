@@ -73,7 +73,6 @@
     - fail2ban
     - golang-bin
     - libpcap-devel
-    - magic-wormhole
     - gobuster
     - chromium
     - chromedriver
@@ -95,7 +94,7 @@
     - speedtest-cli
     - at
     state: installed
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: Debian install common packages
   apt: 
@@ -133,7 +132,7 @@
     validate='/usr/sbin/sshd -T -f %s'
   notify:
   - restart sshd
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: "Fedora add {{ myuser }} to wireshark group"
   ansible.builtin.user:
@@ -141,3 +140,8 @@
     groups: wireshark
     append: yes
   when: ansible_distribution == 'Fedora'
+
+- name: Create .aws directory
+  file: path="/home/{{ myuser }}/.aws" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
+  when: 
+    - inventory_hostname not in groups["servers"]
