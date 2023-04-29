@@ -24,8 +24,8 @@
 
 - hosts: axiom
   roles:
-    - axiom
+  - axiom
 
 - hosts: proxmox
   roles:
-    - proxmox
+  - proxmox
