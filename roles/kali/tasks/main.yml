@@ -131,7 +131,7 @@
   when: ansible_distribution == 'Kali'
 
 - name: Kali download aquatone
-  get_url: url=https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip dest="/home/{{ myuser }}/Downloads/aquatone/aquatone_linux_amd64_1.7.0.zip" sha256sum=077119d9ccc5e19bb7323a65402aeb4f3460297fb8107efaeeb428e0982fdeac
+  get_url: url=https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip dest="/home/{{ myuser }}/Downloads/aquatone/aquatone_linux_amd64_1.7.0.zip"  checksum=sha256:077119d9ccc5e19bb7323a65402aeb4f3460297fb8107efaeeb428e0982fdeac
   become_user: "{{ myuser }}"
   become: yes
   when: ansible_distribution == 'Kali'
