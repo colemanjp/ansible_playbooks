@@ -4,7 +4,7 @@
     name: Virtualbox
     description: Virtualbox Repo
     baseurl: http://download.virtualbox.org/virtualbox/rpm/fedora/$releasever/$basearch
-    gpgkey: https://www.virtualbox.org/download/oracle_vbox.asc
+    gpgkey: https://www.virtualbox.org/download/oracle_vbox_2016.asc
     gpgcheck: 1
     repo_gpgcheck: 1
     enabled: 1
@@ -224,21 +224,21 @@
     - kubernetes-client
     - helm
     state: installed
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: Install keybase key 
   become: yes
   rpm_key:
     key: https://keybase.io/docs/server_security/code_signing_key.asc
     state: present
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: Install keybase
   become: yes
   dnf: 
     name: https://prerelease.keybase.io/keybase_amd64.rpm
     state: installed
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: Remove laptop packages
   become: yes
@@ -255,7 +255,7 @@
     - podman-docker
     autoremove: yes
     state: absent
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: "Install logseq flatpak for {{ myuser }}"
   become: yes
@@ -265,7 +265,7 @@
     method: user
     remote: flathub
     state: present
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: "Install VLC flatpak for {{ myuser }}"
   become: yes
@@ -275,7 +275,7 @@
     method: user
     remote: flathub
     state: present
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: "Install handbrake flatpak for {{ myuser }}"
   become: yes
@@ -285,7 +285,7 @@
     method: user
     remote: flathub
     state: present
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: "Install makemkv flatpak for {{ myuser }}"
   become: yes
@@ -295,18 +295,18 @@
     method: user
     remote: flathub
     state: present
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: "Enable service syncthing@{{ myuser }} and start it"
   ansible.builtin.service:
     name: "syncthing@{{ myuser }}"
     enabled: yes
     state: started
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
 
 - name: "Add {{ myuser }} to vboxusers and docker groups"
   ansible.builtin.user:
     name: "{{ myuser }}"
     groups: vboxusers,docker
     append: yes
-  when: ansible_distribution == 'Fedora' and ansible_distribution_version == '36'
+  when: ansible_distribution == 'Fedora'
