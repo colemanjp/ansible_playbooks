@@ -93,7 +93,6 @@
     - texstudio
     - recoll
     - fzf
-    - telnet
     - vim-X11
     - gnome-tweaks
     - dnf-utils

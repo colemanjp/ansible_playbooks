@@ -93,6 +93,7 @@
     - wireshark-cli
     - speedtest-cli
     - at
+    - telnet
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -104,6 +105,7 @@
     - tmux
     - at
     - nmap
+    - telnet
     state: present
   when: ansible_distribution == 'Debian'
 
