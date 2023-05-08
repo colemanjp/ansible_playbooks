@@ -36,6 +36,7 @@
         - nbtscan
         - fzf
         - xauth
+        - parallel
     state: present
   when: ansible_distribution == 'Debian'
 
