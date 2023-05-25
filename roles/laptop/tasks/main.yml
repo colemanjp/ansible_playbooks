@@ -222,6 +222,7 @@
     - hdparm
     - kubernetes-client
     - helm
+    - pdfgrep
     state: installed
   when: ansible_distribution == 'Fedora'
 
