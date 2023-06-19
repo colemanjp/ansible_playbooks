@@ -106,6 +106,7 @@
     - at
     - nmap
     - telnet
+    - python3-pip
     state: present
   when: ansible_distribution == 'Debian'
 
