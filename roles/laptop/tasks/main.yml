@@ -212,7 +212,6 @@
     - sassc
     - pinta
     - gthumb
-    - vim-ale
     - xsane
     - xsane-gimp
     - pulseeffects

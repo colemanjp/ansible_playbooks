@@ -94,6 +94,7 @@
     - speedtest-cli
     - at
     - telnet
+    - vim-ale
     state: installed
   when: ansible_distribution == 'Fedora'
 
