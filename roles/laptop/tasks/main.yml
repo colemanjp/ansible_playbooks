@@ -233,6 +233,7 @@
     - kubernetes-client
     - helm
     - pdfgrep
+    - htop
     state: installed
   when: ansible_distribution == 'Fedora'
 
