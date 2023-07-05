@@ -70,6 +70,7 @@
         - arjun
         - dnsx
         - zaproxy
+        - mongo-tools
     state: present
   when: ansible_distribution == 'Kali'
 
