@@ -141,6 +141,7 @@
     - geoclue2-demos 
     - qt
     - d-feet
+    - qqc2-desktop-style
     - okular
     - texlive-overpic
     - texlive-cheatsheet
@@ -302,6 +303,16 @@
   become_user: "{{ myuser }}"
   flatpak:
     name: com.makemkv.MakeMKV
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora'
+
+- name: "Install discord  flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: com.discordapp.Discord
     method: user
     remote: flathub
     state: present
