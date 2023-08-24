@@ -234,6 +234,14 @@
     - helm
     - pdfgrep
     - htop
+    - gnome-pomodoro
+    - libpst
+    - gnome-shell-extension-pop-shell
+    - zeal
+    - recoll-gssp
+    - texlive-detex
+    - tmux-powerline
+    - vim-powerline
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -264,6 +272,7 @@
     - xfce4-settings
     - imsettings-xfce
     - podman-docker
+    - gnome-shell-extension-unite
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
