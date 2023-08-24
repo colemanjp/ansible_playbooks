@@ -169,7 +169,6 @@
     - power-profiles-daemon
     - aws-tools
     - awscli
-    - gnome-shell-extension-unite
     - par
     - gnome-sound-recorder
     - vagrant
@@ -340,3 +339,11 @@
     groups: vboxusers,docker
     append: yes
   when: ansible_distribution == 'Fedora'
+
+- name: Set udev rules for ledger
+  template: src=etc/udev/rules.d/20-ledger.rules
+    dest=/etc/udev/rules.d/20-ledger.rules
+    backup=no
+    owner=0 group=0 mode=0444
+  when: ansible_distribution == 'Fedora'
+
