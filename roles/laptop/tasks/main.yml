@@ -241,6 +241,7 @@
     - texlive-detex
     - tmux-powerline
     - vim-powerline
+    - GeoIP
     state: installed
   when: ansible_distribution == 'Fedora'
 
