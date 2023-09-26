@@ -87,6 +87,16 @@
     enabled: 1
   when: ansible_distribution == 'Fedora'
 
+- name: Add Brave Repo
+  yum_repository:
+    name: brave-browser
+    description: Brave Browser
+    baseurl: https://brave-browser-rpm-release.s3.brave.com/$basearch
+    gpgkey: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
 - name: Install laptop packages
   become: yes
   dnf: 
@@ -191,10 +201,7 @@
     - aspell
     - krb5-workstation
     - livecd-iso-to-mediums
-    - i3 
-    - i3status 
     - dmenu 
-    - i3lock 
     - xbacklight 
     - feh 
     - conky
@@ -235,13 +242,15 @@
     - htop
     - gnome-pomodoro
     - libpst
-    - gnome-shell-extension-pop-shell
     - zeal
     - recoll-gssp
     - texlive-detex
     - tmux-powerline
     - vim-powerline
     - GeoIP
+    - brave-browser
+    - brave-keyring
+    - python3-notebook
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -273,6 +282,11 @@
     - imsettings-xfce
     - podman-docker
     - gnome-shell-extension-unite
+    - gnome-shell-extension-pop-shell
+    - xmonad
+    - i3
+    - i3status
+    - i3lock
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
