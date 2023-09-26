@@ -158,6 +158,20 @@
     state: started
   when: ansible_distribution == 'Debian'
 
+- name: Git clone nuclei-templates repo
+  become: yes
+  become_user: "{{ myuser }}"
+  git: repo=https://github.com/projectdiscovery/nuclei-templates.git dest="/home/{{ myuser }}/nuclei-templates"
+  ignore_errors: yes
+  when: ansible_distribution == 'Debian'
+
+- name: Git clone nuclei fuzzing-templates repo
+  become: yes
+  become_user: "{{ myuser }}"
+  git: repo=https://github.com/projectdiscovery/fuzzing-templates.git dest="/home/{{ myuser }}/fuzzing-templates"
+  ignore_errors: yes
+  when: ansible_distribution == 'Debian'
+
 - name: Git clone seclists repo
   become: yes
   become_user: "{{ myuser }}"
