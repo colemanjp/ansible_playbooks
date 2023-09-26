@@ -71,6 +71,8 @@
         - dnsx
         - zaproxy
         - mongo-tools
+        - jupyter
+        - xterm
     state: present
   when: ansible_distribution == 'Kali'
 
