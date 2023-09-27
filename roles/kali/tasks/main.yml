@@ -117,6 +117,13 @@
     state: started
   when: ansible_distribution == 'Kali'
 
+- name: "Enable service tor and start it"
+  ansible.builtin.service:
+    name: "tor"
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Kali'
+
 - name: Enable service ssh
   ansible.builtin.service:
     name: ssh
@@ -138,3 +145,11 @@
   become_user: "{{ myuser }}"
   become: yes
   when: ansible_distribution == 'Kali'
+
+- name: Git clone paramspider repo
+  become: yes
+  become_user: "{{ myuser }}"
+  git: repo=https://github.com/devanshbatham/ParamSpider.git dest="/home/{{ myuser }}/paramspider"
+  ignore_errors: yes
+  when: ansible_distribution == 'Kali'
+
