@@ -251,6 +251,9 @@
     - brave-browser
     - brave-keyring
     - python3-notebook
+    - task
+    - vit
+    - tasksh
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -283,10 +286,10 @@
     - podman-docker
     - gnome-shell-extension-unite
     - gnome-shell-extension-pop-shell
-    - xmonad
     - i3
     - i3status
     - i3lock
+    - xmonad
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
