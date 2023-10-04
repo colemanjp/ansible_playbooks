@@ -37,6 +37,7 @@
         - fzf
         - xauth
         - parallel
+        - ncurses-term
     state: present
   when: ansible_distribution == 'Debian'
 
@@ -90,11 +91,6 @@
         - python3-impacket
     state: present
   when: ansible_distribution == 'Debian' and ansible_distribution_version == '11'
-
-- name: "Add the user {{ myuser }}"
-  ansible.builtin.user:
-    name: "{{ myuser }}" 
-  when: ansible_distribution == 'Debian'
 
 - name: "Set authorized key for user {{ myuser }} copying it from current user"
   authorized_key:
