@@ -108,6 +108,7 @@
     - nmap
     - telnet
     - python3-pip
+    - git
     state: present
   when: ansible_distribution == 'Debian'
 
@@ -144,6 +145,11 @@
     groups: wireshark
     append: yes
   when: ansible_distribution == 'Fedora'
+
+- name: "Debian add the user {{ myuser }}"
+  ansible.builtin.user:
+    name: "{{ myuser }}"
+  when: ansible_distribution == 'Debian'
 
 - name: Create .aws directory
   file: path="/home/{{ myuser }}/.aws" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
