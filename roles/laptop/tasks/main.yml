@@ -304,6 +304,16 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
+- name: "Install spotify flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: com.spotify.Client
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora'
+
 - name: "Install VLC flatpak for {{ myuser }}"
   become: yes
   become_user: "{{ myuser }}"
