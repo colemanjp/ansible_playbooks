@@ -158,6 +158,11 @@
     - texlive-libertine
     - texlive-bigfoot
     - texlive-mdframed
+    - texlive-fontawesome
+    - texlive-labels
+    - texlive-bizcard
+    - mozilla-fira-sans-fonts
+    - mozilla-fira-mono-fonts
     - lshw
     - python3-csvkit
     - clamav
@@ -246,7 +251,6 @@
     - recoll-gssp
     - texlive-detex
     - tmux-powerline
-    - vim-powerline
     - GeoIP
     - brave-browser
     - brave-keyring
@@ -254,6 +258,9 @@
     - task
     - vit
     - tasksh
+    - neovim
+    - lftp
+    - filezilla
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -290,6 +297,8 @@
     - i3status
     - i3lock
     - xmonad
+    - vim-powerline
+
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
