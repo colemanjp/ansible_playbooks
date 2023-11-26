@@ -261,6 +261,10 @@
     - neovim
     - lftp
     - filezilla
+    - ckermit
+    - geeqie
+    - rawtherapee
+    - digikam
     state: installed
   when: ansible_distribution == 'Fedora'
 
