@@ -5,10 +5,7 @@
     update_cache: yes
     cache_valid_time: 86400 #1 day
     name:
-        - openvswitch-switch
-        - p7zip
         - nfs-kernel-server
-        - samba
     state: present
   when: ansible_distribution == 'Debian'
 
