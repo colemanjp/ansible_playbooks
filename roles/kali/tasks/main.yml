@@ -17,7 +17,6 @@
     update_cache: yes
     cache_valid_time: 86400 #1 day
     name:
-        #- chromium 
         - zim 
         - syncthing 
         - seclists 
@@ -73,6 +72,7 @@
         - mongo-tools
         - jupyter
         - xterm
+        - xrdp
     state: present
   when: ansible_distribution == 'Kali'
 
@@ -128,6 +128,17 @@
   ansible.builtin.service:
     name: ssh
     enabled: yes
+  when: ansible_distribution == 'Kali'
+
+- name: Kali create .vnc directory 
+  file: path="/home/{{ myuser }}/.vnc" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0700
+  when: ansible_distribution == 'Kali'
+
+- name: Kali install tightvnc xstartup
+  template: src=home/myuser/.vnc/xstartup
+    dest="/home/{{ myuser }}/.vnc/xstartup"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when: ansible_distribution == 'Kali'
 
 - name: Kali download chromium unstable deb

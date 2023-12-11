@@ -1,0 +1,5 @@
+#!/bin/sh
+# Managed by ansible. Do not hand edit.
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+startxfce4 &
