@@ -95,6 +95,7 @@
     - at
     - telnet
     - vim-ale
+    - distribution-gpg-keys
     state: installed
   when: ansible_distribution == 'Fedora'
 
