@@ -2,4 +2,5 @@
 # Managed by ansible. Do not hand edit.
 unset SESSION_MANAGER
 unset DBUS_SESSION_BUS_ADDRESS
+autocutsel -fork
 startxfce4 &
