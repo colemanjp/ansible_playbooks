@@ -124,28 +124,6 @@
     owner=0 group=0 mode=0440
   when: ansible_distribution == 'Debian'
 
-- name: Create Tools directory 
-  file: path="/home/{{ myuser }}/Tools" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
-  when: ansible_distribution == 'Debian'
-
-- name: Manage github tokens in Tools directory
-  template: src="home/myuser/Tools/.github_tokens.j2"
-    dest="/home/{{ myuser }}/Tools/.github_tokens"
-    backup=yes
-    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
-  when: ansible_distribution == 'Debian'
-
-- name: Create .config/amass directory 
-  file: path="/home/{{ myuser }}/.config/amass" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
-  when: ansible_distribution == 'Debian'
-
-- name: Manage amass config.ini
-  template: src=home/myuser/.config/amass/config.ini.j2
-    dest="/home/{{ myuser }}/.config/amass/config.ini"
-    backup=yes
-    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
-  when: ansible_distribution == 'Debian'
-
 - name: "Enable service syncthing@{{ myuser }} and start it"
   ansible.builtin.service:
     name: "syncthing@{{ myuser }}"
@@ -193,18 +171,4 @@
   become_user: "{{ myuser }}"
   git: repo=https://github.com/pry0cc/proteus.git dest="/home/{{ myuser }}/.proteus"
   ignore_errors: yes
-  when: ansible_distribution == 'Debian'
-
-- name: Git clone reconftw repo
-  become: yes
-  become_user: "{{ myuser }}"
-  git: repo=https://github.com/six2dez/reconftw.git dest="/home/{{ myuser }}/reconftw"
-  ignore_errors: yes
-  when: ansible_distribution == 'Debian'
-
-- name: install reconftw.cfg
-  template: src=home/myuser/reconftw/reconftw.cfg.j2
-    dest="/home/{{ myuser }}/reconftw/reconftw.cfg"
-    backup=yes
-    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when: ansible_distribution == 'Debian'

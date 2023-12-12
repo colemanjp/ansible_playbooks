@@ -50,6 +50,7 @@
         - docker-ce-cli
         - containerd.io
         - docker-compose
+        - uidmap
         - xsel
         - xdot
         - subfinder
@@ -94,16 +95,6 @@
   become_user: "{{ myuser }}"
   file:
     path: "/home/{{ myuser }}/Downloads"
-    state: directory
-    owner: "{{ myuser }}"
-    group: "{{ myuser }}"
-    mode: 0755
-  when: ansible_distribution == 'Kali'
-
-- name: create "/home/{{ myuser }}/reconftw/Recon"
-  become_user: "{{ myuser }}"
-  file:
-    path: "/home/{{ myuser }}/reconftw/Recon"
     state: directory
     owner: "{{ myuser }}"
     group: "{{ myuser }}"
