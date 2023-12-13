@@ -183,7 +183,7 @@
   git: repo=https://github.com/six2dez/reconftw.git dest="/home/{{ myuser }}/reconftw"
   ignore_errors: yes
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
     
 - name: install reconftw.cfg
   template: src=home/myuser/reconftw/reconftw.cfg
@@ -191,12 +191,12 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
 
 - name: Create Tools directory
   file: path="/home/{{ myuser }}/Tools" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
 
 - name: Manage github tokens in Tools directory
   template: src="home/myuser/Tools/.github_tokens"
@@ -204,12 +204,19 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
 
+- name: Manage github tokens in reconftw directory
+  template: src="home/myuser/Tools/.github_tokens"
+    dest="/home/{{ myuser }}/reconftw/Recon/.github_tokens"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when:
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
 - name: Create .config/amass directory 
   file: path="/home/{{ myuser }}/.config/amass" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
 
 - name: Manage amass config.ini
   template: src=home/myuser/.config/amass/config.ini
@@ -217,5 +224,13 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+
+- name: Manage amass config.ini inside reconftw
+  template: src=home/myuser/.config/amass/config.ini
+    dest="/home/{{ myuser }}/reconftw/Recon/config.ini"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when:
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
 
