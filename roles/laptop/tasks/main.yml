@@ -265,6 +265,7 @@
     - geeqie
     - rawtherapee
     - digikam
+    - terraform
     state: installed
   when: ansible_distribution == 'Fedora'
 
