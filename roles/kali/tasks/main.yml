@@ -75,6 +75,8 @@
         - xterm
         - xrdp
         - autocutsel
+        - htop
+        - gospider
     state: present
   when: ansible_distribution == 'Kali'
 
