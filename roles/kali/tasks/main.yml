@@ -80,6 +80,19 @@
     state: present
   when: ansible_distribution == 'Kali'
 
+- name: Install multiple tools with go install
+  become_user: "{{ myuser }}"
+  become: true
+  loop:
+    - github.com/tomnomnom/anew@latest
+    - github.com/pry0cc/tew@latest
+    - github.com/d3mondev/puredns/v2@latest
+    - github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
+  shell: go install {{ item }}
+  when: ansible_distribution == 'Kali'
+  loop_control:
+    label: "{{ item.split('/')[2] }}"
+
 - name: Add vboxsf group
   ansible.builtin.group:
     name: vboxsf
