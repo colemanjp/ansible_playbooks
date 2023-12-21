@@ -88,6 +88,8 @@
     - github.com/pry0cc/tew@latest
     - github.com/d3mondev/puredns/v2@latest
     - github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
+    - github.com/tomnomnom/qsreplace@latest
+    - github.com/tomnomnom/gf@latest
   shell: go install {{ item }}
   when: ansible_distribution == 'Kali'
   loop_control:
