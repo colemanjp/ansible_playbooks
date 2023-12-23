@@ -98,6 +98,17 @@
     state: present
   when: ansible_distribution == 'Debian' and (ansible_distribution_version == '11' or ansible_distribution_major_version == '12')
 
+- name: Install multiple tools with go install on debian 10 axiom
+  become_user: "{{ myuser }}"
+  become: true
+  loop:
+    - github.com/pry0cc/tew@latest
+    - github.com/projectdiscovery/httpx/cmd/httpx@latest
+  shell: /usr/local/go/bin/go install {{ item }}
+  when: ansible_distribution == 'Debian' and ansible_distribution_version == '10'
+  loop_control:
+    label: "{{ item.split('/')[2] }}"
+
 - name: "Set authorized key for user {{ myuser }} copying it from current user"
   authorized_key:
     user: "{{ myuser }}"
