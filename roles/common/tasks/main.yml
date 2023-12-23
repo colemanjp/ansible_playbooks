@@ -184,6 +184,11 @@
   ignore_errors: yes
   when:
     inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+
+- name: Create Recon directory
+  file: path="/home/{{ myuser }}/reconftw/Recon" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
+  when:
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
     
 - name: install reconftw.cfg
   template: src=home/myuser/reconftw/reconftw.cfg
