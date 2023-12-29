@@ -1,0 +1,3 @@
+[submodule "roles/common/files/home/myuser/gf-patterns"]
+	path = roles/common/files/home/myuser/gf-patterns
+	url = https://github.com/NitinYadav00/gf-patterns.git
