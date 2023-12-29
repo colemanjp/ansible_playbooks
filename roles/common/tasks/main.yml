@@ -177,6 +177,19 @@
     - inventory_hostname not in groups["servers"]
     - inventory_hostname not in groups["kali"]
 
+- name: Copy gf-patterns to .gf
+  become: yes
+  become_user: "{{ myuser }}"
+  #ansible.builtin.copy:
+  ansible.posix.synchronize:
+    src: home/myuser/gf-patterns/
+    dest: "/home/{{ myuser }}/.gf"
+    rsync_opts:
+      - "--exclude=.git"
+      - "--exclude=README.md"
+  when:
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+
 - name: Git clone reconftw repo
   become: yes
   become_user: "{{ myuser }}"
