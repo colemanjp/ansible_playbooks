@@ -78,6 +78,7 @@
         - htop
         - gospider
         - massdns
+        - restic
     state: present
   when: ansible_distribution == 'Kali'
 
