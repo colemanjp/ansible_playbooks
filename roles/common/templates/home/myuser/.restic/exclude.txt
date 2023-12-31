@@ -1,0 +1,18 @@
+# Managed by ansible
+.cache
+.Cache
+cache
+Cache
+CacheStorage
+Code Cache
+.config/Microsoft
+.config/Slack
+.Crashplan
+.dropbox
+.dropbox-dist
+.local/share/containers/storage/overlay
+.local/share/docker/overlay2
+.local/share/docker/volumes
+.local/share/flatpak
+.recoll
+.zoom

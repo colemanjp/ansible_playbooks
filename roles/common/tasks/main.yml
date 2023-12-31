@@ -252,3 +252,15 @@
   when:
     inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
 
+- name: Create .restic directory
+  file: path="/home/{{ myuser }}/.restic" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0700
+  when:
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["laptops"]
+
+- name: Manage exclude.txt in .restic directory
+  template: src="home/myuser/.restic/exclude.txt"
+    dest="/home/{{ myuser }}/.restic/exclude.txt"
+    backup=yes
+    owner="{{ myuser }}" group="{{ myuser }}" mode=0400
+  when:
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["laptops"]
