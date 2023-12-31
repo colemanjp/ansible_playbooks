@@ -103,7 +103,6 @@
   become: true
   loop:
     - github.com/pry0cc/tew@latest
-    - github.com/projectdiscovery/httpx/cmd/httpx@latest
   shell: /usr/local/go/bin/go install {{ item }}
   when: ansible_distribution == 'Debian' and ansible_distribution_version == '10'
   loop_control:
