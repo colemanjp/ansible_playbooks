@@ -79,6 +79,8 @@
         - gospider
         - massdns
         - restic
+        - mutt
+        - sendmail
     state: present
   when: ansible_distribution == 'Kali'
 
@@ -132,6 +134,13 @@
 - name: "Enable service tor and start it"
   ansible.builtin.service:
     name: "tor"
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Kali'
+
+- name: "Enable service sendmail and start it"
+  ansible.builtin.service:
+    name: "sendmail"
     enabled: yes
     state: started
   when: ansible_distribution == 'Kali'
