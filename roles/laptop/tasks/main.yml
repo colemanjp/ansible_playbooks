@@ -265,7 +265,10 @@
     - geeqie
     - rawtherapee
     - digikam
+    - argyllcms
+    - libXxf86vm-devel
     - terraform
+    - mu
     state: installed
   when: ansible_distribution == 'Fedora'
 
