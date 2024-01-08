@@ -378,10 +378,10 @@
     state: started
   when: ansible_distribution == 'Fedora'
 
-- name: "Add {{ myuser }} to vboxusers and docker groups"
+- name: "Add {{ myuser }} to multiple groups"
   ansible.builtin.user:
     name: "{{ myuser }}"
-    groups: vboxusers,docker
+    groups: vboxusers,docker,dialout
     append: yes
   when: ansible_distribution == 'Fedora'
 
