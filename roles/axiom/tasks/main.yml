@@ -38,6 +38,7 @@
         - xauth
         - parallel
         - ncurses-term
+        - prips
     state: present
   when: ansible_distribution == 'Debian'
 
