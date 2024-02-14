@@ -250,7 +250,6 @@
     - zeal
     - recoll-gssp
     - texlive-detex
-    - tmux-powerline
     - GeoIP
     - brave-browser
     - brave-keyring
@@ -269,6 +268,11 @@
     - libXxf86vm-devel
     - terraform
     - mu
+    - blackbox-terminal
+    - ddrescue
+    - python3-qt5-webengine
+    - pcsc-tools
+    - taskd
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -306,7 +310,7 @@
     - i3lock
     - xmonad
     - vim-powerline
-
+    - tmux-powerline
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
