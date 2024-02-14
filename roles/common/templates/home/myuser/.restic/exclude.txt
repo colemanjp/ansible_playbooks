@@ -16,3 +16,5 @@ Code Cache
 .local/share/flatpak
 .recoll
 .zoom
+*.iso
+*.ova
