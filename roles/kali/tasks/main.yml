@@ -81,6 +81,7 @@
         - restic
         - mutt
         - sendmail
+        - dradis
     state: present
   when: ansible_distribution == 'Kali'
 
