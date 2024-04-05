@@ -117,7 +117,6 @@
     - gnome-tweaks
     - dnf-utils
     - google-chrome-stable
-    - slack
     - teams
     - nautilus-dropbox
     - ike-scan
@@ -161,6 +160,8 @@
     - texlive-fontawesome
     - texlive-labels
     - texlive-bizcard
+    - texlive-tufte-latex
+    - texlive-hardwrap
     - mozilla-fira-sans-fonts
     - mozilla-fira-mono-fonts
     - lshw
@@ -188,7 +189,6 @@
     - gnome-sound-recorder
     - vagrant
     - xdotool
-    - konsole 
     - gnome-extensions-app
     - banner
     - playonlinux
@@ -268,11 +268,18 @@
     - libXxf86vm-devel
     - terraform
     - mu
+    - konsole 
     - blackbox-terminal
+    - foot
     - ddrescue
     - python3-qt5-webengine
     - pcsc-tools
     - taskd
+    - sigil
+    - buku
+    - md5deep
+    - hugo
+    - nodejs-npm
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -311,6 +318,7 @@
     - xmonad
     - vim-powerline
     - tmux-powerline
+    - slack
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
