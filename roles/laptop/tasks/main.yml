@@ -211,7 +211,6 @@
     - feh 
     - conky
     - sslscan
-    - xournal
     - pandoc
     - darktable
     - perl-Archive-Zip
@@ -280,6 +279,8 @@
     - md5deep
     - hugo
     - nodejs-npm
+    - v4l-utils
+    - xournalpp
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -319,6 +320,7 @@
     - vim-powerline
     - tmux-powerline
     - slack
+    - xournal
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
