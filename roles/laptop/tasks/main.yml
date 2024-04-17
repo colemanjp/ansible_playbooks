@@ -216,7 +216,6 @@
     - perl-Archive-Zip
     - virt-viewer
     - kleopatra
-    - jenkins
     - onesixtyone
     - clearlooks-compact-gnome-theme
     - gnome-shell-extension-user-theme
@@ -281,6 +280,7 @@
     - nodejs-npm
     - v4l-utils
     - xournalpp
+    - kcm_wacomtablet
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -321,6 +321,7 @@
     - tmux-powerline
     - slack
     - xournal
+    - jenkins
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
