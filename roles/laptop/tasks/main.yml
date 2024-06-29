@@ -280,6 +280,11 @@
     - v4l-utils
     - xournalpp
     - kcm_wacomtablet
+    - unetbootin
+    - iotop
+    - kitty
+    - alacritty
+    - fd-find
     state: installed
   when: ansible_distribution == 'Fedora'
 
