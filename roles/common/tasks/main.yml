@@ -96,6 +96,7 @@
     - telnet
     - vim-ale
     - distribution-gpg-keys
+    - kitty 
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -110,6 +111,7 @@
     - telnet
     - python3-pip
     - git
+    - kitty
     state: present
   when: ansible_distribution == 'Debian'
 
