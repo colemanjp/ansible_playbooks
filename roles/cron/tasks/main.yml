@@ -12,3 +12,10 @@
     minute: "57"
     job: "/usr/sbin/anacron -t $HOME/.anacron/etc/anacrontab -S $HOME/.anacron/var/spool/anacron"
     user: "{{ myuser }}"
+
+- name: "task sync for {{ myuser }}"
+  ansible.builtin.cron:
+    name: "task sync"
+    minute: "58"
+    job: "/usr/bin/task sync > /dev/null 2>&1"
+    user: "{{ myuser }}"
