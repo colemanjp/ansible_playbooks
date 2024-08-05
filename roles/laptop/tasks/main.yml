@@ -282,9 +282,9 @@
     - kcm_wacomtablet
     - unetbootin
     - iotop
-    - kitty
     - alacritty
     - fd-find
+    - tlp
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -330,15 +330,15 @@
     state: absent
   when: ansible_distribution == 'Fedora'
 
-- name: "Install logseq flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: com.logseq.Logseq
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
+#- name: "Install logseq flatpak for {{ myuser }}"
+#  become: yes
+#  become_user: "{{ myuser }}"
+#  flatpak:
+#    name: com.logseq.Logseq
+#    method: user
+#    remote: flathub
+#    state: present
+#  when: ansible_distribution == 'Fedora'
 
 - name: "Install spotify flatpak for {{ myuser }}"
   become: yes
@@ -355,26 +355,6 @@
   become_user: "{{ myuser }}"
   flatpak:
     name: org.videolan.VLC
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install handbrake flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: fr.handbrake.ghb
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install makemkv flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: com.makemkv.MakeMKV
     method: user
     remote: flathub
     state: present
