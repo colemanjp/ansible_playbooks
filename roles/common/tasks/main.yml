@@ -97,6 +97,7 @@
     - vim-ale
     - distribution-gpg-keys
     - kitty 
+    - zstd
     state: installed
   when: ansible_distribution == 'Fedora'
 
