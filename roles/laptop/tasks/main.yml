@@ -161,6 +161,14 @@
     - texlive-bizcard
     - texlive-tufte-latex
     - texlive-hardwrap
+    - texlive-roboto
+    - texlive-detex
+    - texlive-fontawesome5
+    - texlive-sourcesanspro
+    - texlive-tcolorbox
+    - texlive-tikzfill
+    - texlive-todonotes
+    - adobe-source-sans-pro-fonts
     - mozilla-fira-sans-fonts
     - mozilla-fira-mono-fonts
     - lshw
@@ -246,7 +254,6 @@
     - libpst
     - zeal
     - recoll-gssp
-    - texlive-detex
     - GeoIP
     - brave-browser
     - brave-keyring
@@ -285,6 +292,10 @@
     - alacritty
     - fd-find
     - tlp
+    - imhex
+    - kdissert
+    - merkaartor
+    - ranger
     state: installed
   when: ansible_distribution == 'Fedora'
 
