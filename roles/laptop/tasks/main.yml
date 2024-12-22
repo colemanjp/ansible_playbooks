@@ -294,8 +294,11 @@
     - tlp
     - imhex
     - kdissert
+    - vym
+    - minder
     - merkaartor
     - ranger
+    - libxcrypt-compat
     state: installed
   when: ansible_distribution == 'Fedora'
 
