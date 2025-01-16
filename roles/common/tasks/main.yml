@@ -98,6 +98,8 @@
     - distribution-gpg-keys
     - kitty 
     - zstd
+    - fish
+    - btop
     state: installed
   when: ansible_distribution == 'Fedora'
 
