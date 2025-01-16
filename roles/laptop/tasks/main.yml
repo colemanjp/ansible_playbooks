@@ -168,6 +168,11 @@
     - texlive-tcolorbox
     - texlive-tikzfill
     - texlive-todonotes
+    - texlive-classicthesis
+    - texlive-pagella-otf
+    - texlive-framed
+    - texlive-metalogo
+    - texlive-titling
     - adobe-source-sans-pro-fonts
     - mozilla-fira-sans-fonts
     - mozilla-fira-mono-fonts
@@ -299,6 +304,8 @@
     - merkaartor
     - ranger
     - libxcrypt-compat
+    - helix
+    - mpv
     state: installed
   when: ansible_distribution == 'Fedora'
 
