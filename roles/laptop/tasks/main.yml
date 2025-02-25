@@ -263,10 +263,11 @@
     - brave-browser
     - brave-keyring
     - python3-notebook
+    - python3-idle
+    - python3-spyder
     - task
     - vit
     - tasksh
-    - neovim
     - lftp
     - filezilla
     - ckermit
@@ -306,6 +307,12 @@
     - libxcrypt-compat
     - helix
     - mpv
+    - gtk4-devel
+    - zig
+    - libadwaita-devel
+    - xpad
+    - ptyxis
+    - bat
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -347,6 +354,14 @@
     - slack
     - xournal
     - jenkins
+    - nodejs-aw-webui
+    - python3-aw-client
+    - python3-aw-core.noarch
+    - python3-aw-qt
+    - cabal-install
+    - ghc-unliftio-core-devel
+    - ghc-unliftio-core
+    - ghc-pcre-light-devel
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
