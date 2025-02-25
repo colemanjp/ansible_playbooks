@@ -1,9 +1,9 @@
 ---
-- name: Import the docker apt key
-  apt_key:
-    url: https://download.docker.com/linux/debian/gpg 
-    state: present
-  when: ansible_distribution == 'Kali'
+#- name: Import the docker apt key
+#  apt_key:
+#    url: https://download.docker.com/linux/debian/gpg 
+#    state: present
+#  when: ansible_distribution == 'Kali'
 
 - name: Add docker apt repository
   ansible.builtin.apt_repository:
@@ -23,6 +23,8 @@
         - sslscan
         - python3-venv 
         - python3-pip 
+        - idle
+        - spyder
         - sublist3r 
         - awscli 
         - keepassxc 
