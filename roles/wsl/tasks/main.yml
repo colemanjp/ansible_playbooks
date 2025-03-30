@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  tasks:
+    - name: "Kali WSL Install Packages"
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 86400 # 1 day
+        name:
+          - kali-desktop-core
+          - exiftool
+          - gcc
+          - geeqie
+          - man-db
+          - neovim
+          - 7zip
+          - unzip
+          - usbutils
+        state: present
+      when: ansible_distribution == 'Kali' and ansible_virtualization_type == 'wsl'
