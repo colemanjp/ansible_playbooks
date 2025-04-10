@@ -117,7 +117,6 @@
     - gnome-tweaks
     - dnf-utils
     - google-chrome-stable
-    - teams
     - nautilus-dropbox
     - ike-scan
     - xsel
@@ -362,6 +361,7 @@
     - ghc-unliftio-core-devel
     - ghc-unliftio-core
     - ghc-pcre-light-devel
+    - teams
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
