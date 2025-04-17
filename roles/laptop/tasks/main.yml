@@ -259,8 +259,6 @@
     - zeal
     - recoll-gssp
     - GeoIP
-    - brave-browser
-    - brave-keyring
     - python3-notebook
     - python3-idle
     - python3-spyder
@@ -362,6 +360,8 @@
     - ghc-unliftio-core
     - ghc-pcre-light-devel
     - teams
+    - brave-browser
+    - brave-keyring
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
