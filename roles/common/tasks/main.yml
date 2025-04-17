@@ -101,6 +101,7 @@
     - fish
     - btop
     - neovim
+    - neovim-ale
     state: installed
   when: ansible_distribution == 'Fedora'
 
