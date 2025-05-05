@@ -310,6 +310,7 @@
     - xpad
     - ptyxis
     - bat
+    - libappindicator
     state: installed
   when: ansible_distribution == 'Fedora'
 
