@@ -1,14 +1,9 @@
 ---
-#- name: Import the docker apt key
-#  apt_key:
-#    url: https://download.docker.com/linux/debian/gpg 
-#    state: present
-#  when: ansible_distribution == 'Kali'
 
-- name: Add docker apt repository
+- name: remove docker apt repository
   ansible.builtin.apt_repository:
     repo: deb https://download.docker.com/linux/debian buster stable
-    state: present
+    state: absent
   when: ansible_distribution == 'Kali'
 
 - name: Kali install packages
@@ -35,7 +30,6 @@
         - smtp-user-enum 
         - tnscmd10g 
         - stow
-        - wkhtmltopdf 
         - bind9-dnsutils 
         - dotdotpwn
         - tor
@@ -48,10 +42,10 @@
         - neovim
         - jq
         - fzf 
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-        - docker-compose
+      #  - docker-ce
+      #  - docker-ce-cli
+      #  - containerd.io
+      #  - docker-compose
         - uidmap
         - xsel
         - xdot
@@ -84,6 +78,7 @@
         - mutt
         - sendmail
         - dradis
+        - pst-utils
     state: present
   when: ansible_distribution == 'Kali'
 
