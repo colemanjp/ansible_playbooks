@@ -311,6 +311,7 @@
     - ptyxis
     - bat
     - libappindicator
+    - gnome-shell-extension-gpaste
     state: installed
   when: ansible_distribution == 'Fedora'
 
