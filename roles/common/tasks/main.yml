@@ -101,8 +101,15 @@
     - fish
     - btop
     - neovim
-    - neovim-ale
     state: installed
+  when: ansible_distribution == 'Fedora'
+
+- name: Fedora remove common packages
+  become: yes
+  dnf:
+    name:
+    - neovim-ale
+    state: absent
   when: ansible_distribution == 'Fedora'
 
 - name: Debian install common packages
