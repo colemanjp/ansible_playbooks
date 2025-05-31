@@ -79,6 +79,7 @@
         - sendmail
         - dradis
         - pst-utils
+        - gowitness
     state: present
   when: ansible_distribution == 'Kali'
 
