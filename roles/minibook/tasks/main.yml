@@ -1,0 +1,39 @@
+- name: Add Dropbox Repo
+  become: yes
+  yum_repository:
+    name: dropbox
+    description: Dropbox repo
+    baseurl: https://linux.dropbox.com/fedora/41/
+    gpgkey: https://linux.dropbox.com/fedora/rpm-public-key.asc
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Chrome Repo
+  become: yes
+  yum_repository:
+    name: google-chrome
+    description: google-chrome
+    baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
+    gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
+- name: Install minibook packages
+  become: yes
+  dnf: 
+    name:
+    - keepassxc
+    - fzf
+    - gnome-tweaks
+    - google-chrome-stable
+    - xsel
+    - netcat
+    - par
+    - gnome-extensions-app
+    - htop
+    - nautilus-dropbox
+    - python3-gpg
+    state: installed
+  when: ansible_distribution == 'Fedora'

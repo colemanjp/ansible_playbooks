@@ -29,3 +29,7 @@
 - hosts: proxmox
   roles:
   - proxmox
+
+- hosts: minibook
+  roles:
+  - minibook
