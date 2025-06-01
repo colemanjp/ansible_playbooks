@@ -36,7 +36,6 @@
     - sysstat
     - masscan
     - dnf-plugin-system-upgrade
-    - unicornscan
     - aspell-en
     - openldap-devel
     - zsh
@@ -47,7 +46,6 @@
     - libxml2-devel
     - libxslt-devel
     - libxml++-devel
-    - pygobject2-devel
     - freetype-devel
     - libjpeg-devel
     - gtk+-devel
@@ -55,7 +53,6 @@
     - gtk2-devel
     - vte-devel
     - tmux
-    - nikto
     - fping
     - hydra
     - postgresql-upgrade
