@@ -312,6 +312,8 @@
     - bat
     - libappindicator
     - gnome-shell-extension-gpaste
+    - yubikey-manager
+    - yubikey-manager-qt
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -322,12 +324,12 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
-- name: Install keybase
-  become: yes
-  dnf: 
-    name: https://prerelease.keybase.io/keybase_amd64.rpm
-    state: installed
-  when: ansible_distribution == 'Fedora'
+  #- name: Install keybase
+  #become: yes
+  #dnf: 
+  #  name: https://prerelease.keybase.io/keybase_amd64.rpm
+  #  state: installed
+  #when: ansible_distribution == 'Fedora'
 
 - name: Remove laptop packages
   become: yes
