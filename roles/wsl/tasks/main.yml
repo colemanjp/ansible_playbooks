@@ -14,6 +14,7 @@
           - man-db
           - neovim
           - restic
+          - stow
           - 7zip
           - unzip
           - usbutils
