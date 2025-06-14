@@ -24,4 +24,6 @@ Downloads/*.gz
 Downloads/*.tgz
 Downloads/*.tar
 Downloads/*.7z
+Downloads/*.rpm
 vmware/nobackup
+Trash
