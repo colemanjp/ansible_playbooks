@@ -232,6 +232,7 @@
     - virt-manager
     - virt-viewer
     - libguestfs-tools
+    - guestfs-tools
     - python3-libguestfs
     - virt-top
     - kleopatra
@@ -323,6 +324,7 @@
     - yubikey-manager
     - yubikey-manager-qt
     state: installed
+    disable_excludes: main
   when: ansible_distribution == 'Fedora'
 
 - name: Install keybase key 
@@ -439,3 +441,9 @@
     owner=0 group=0 mode=0444
   when: ansible_distribution == 'Fedora'
 
+- name: Manage dnf.conf
+  template: src=etc/dnf/dnf.conf
+    dest=/etc/dnf/dnf.conf
+    backup=yes
+    owner=0 group=0 mode=0444
+  when: ansible_distribution == 'Fedora'
