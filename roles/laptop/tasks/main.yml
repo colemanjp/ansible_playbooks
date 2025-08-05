@@ -311,7 +311,6 @@
     - merkaartor
     - ranger
     - libxcrypt-compat
-    - helix
     - mpv
     - gtk4-devel
     - zig
@@ -323,6 +322,7 @@
     - gnome-shell-extension-gpaste
     - yubikey-manager
     - yubikey-manager-qt
+    - qpdf
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
@@ -376,6 +376,7 @@
     - teams
     - brave-browser
     - brave-keyring
+    - helix
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
