@@ -12,11 +12,19 @@
           - gcc
           - geeqie
           - man-db
-          - neovim
           - restic
           - stow
           - 7zip
           - unzip
           - usbutils
         state: present
+      when: ansible_distribution == 'Kali' and ansible_virtualization_type == 'wsl'
+    - name: "Kali WSL Uninstall Packages"
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 86400 # 1 day
+        name:
+          - neovim
+        state: absent
       when: ansible_distribution == 'Kali' and ansible_virtualization_type == 'wsl'
