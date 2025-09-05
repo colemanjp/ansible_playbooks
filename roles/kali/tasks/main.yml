@@ -80,6 +80,7 @@
         - dradis
         - pst-utils
         - gowitness
+        - kitty
     state: present
   when: ansible_distribution == 'Kali'
 
