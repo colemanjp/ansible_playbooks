@@ -16,6 +16,21 @@
   become: yes
   when: ansible_distribution == 'Kali'
 
+- name: Kali uninstall packages
+  become: yes
+  apt: 
+    name:
+        # Start remove distribution docker
+        - docker.io
+        - docker-compose
+        - docker-doc
+        - podman-docker
+        - containerd
+        - runc
+        # End remove distribution docker
+    state: absent
+  when: ansible_distribution == 'Kali'
+
 - name: Kali install packages
   become: yes
   apt: 
@@ -52,10 +67,13 @@
         - neovim
         - jq
         - fzf 
+        # Start docker.com packages
         - docker-ce
         - docker-ce-cli
         - containerd.io
-        - docker-compose
+        - docker-buildx-plugin
+        - docker-compose-plugin
+        # End docker.com packages
         - uidmap
         - xsel
         - xdot
