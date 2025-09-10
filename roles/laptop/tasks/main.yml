@@ -235,6 +235,7 @@
     - guestfs-tools
     - python3-libguestfs
     - virt-top
+    - NetworkManager-tui
     - kleopatra
     - onesixtyone
     - clearlooks-compact-gnome-theme
