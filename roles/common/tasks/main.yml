@@ -98,6 +98,7 @@
     - fish
     - btop
     - neovim
+    - mc
     state: installed
   when: ansible_distribution == 'Fedora'
 
