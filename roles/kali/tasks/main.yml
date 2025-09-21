@@ -110,6 +110,9 @@
         - pst-utils
         - gowitness
         - kitty
+        - btop
+        - ripgrep
+        - python3-django-environ
     state: present
   when: ansible_distribution == 'Kali'
 
