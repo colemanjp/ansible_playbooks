@@ -122,6 +122,7 @@
     - python3-pip
     - git
     - kitty
+    - neovim
     state: present
   when: ansible_distribution == 'Debian'
 
