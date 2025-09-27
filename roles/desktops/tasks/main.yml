@@ -1,0 +1,36 @@
+---
+- name: Desktops Debian install packages
+  become: yes
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - tigervnc-standalone-server
+        - syncthing
+    state: present
+  when: ansible_distribution == 'Debian'
+
+- name: Desktops Debian remove packages
+  become: yes
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - tightvncserver
+        - wayvnc
+    state: absent
+  when: ansible_distribution == 'Debian'
+
+- name: Desktops Debian enable service ssh and start it
+  ansible.builtin.service:
+    name: ssh
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Debian'
+
+- name: "Debian enable service syncthing@{{ myuser }} and start it"
+  ansible.builtin.service:
+    name: "syncthing@{{ myuser }}"
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Debian'
