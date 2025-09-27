@@ -324,6 +324,7 @@
     - yubikey-manager
     - yubikey-manager-qt
     - qpdf
+    - ffuf
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
