@@ -33,3 +33,7 @@
 - hosts: minibook
   roles:
   - minibook
+
+- hosts: desktops
+  roles:
+  - desktops
