@@ -97,7 +97,6 @@
     - zstd
     - fish
     - btop
-    - neovim
     - mc
     state: installed
   when: ansible_distribution == 'Fedora'
@@ -107,6 +106,7 @@
   dnf:
     name:
     - neovim-ale
+    - neovim
     state: absent
   when: ansible_distribution == 'Fedora'
 
