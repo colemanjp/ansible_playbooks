@@ -18,7 +18,7 @@
     baseurl: https://packages.microsoft.com/yumrepos/ms-teams
     gpgkey: https://packages.microsoft.com/keys/microsoft.asc
     gpgcheck: 1
-    enabled: 1
+    enabled: 0
   when: ansible_distribution == 'Fedora'
 
 - name: Add Dropbox Repo
@@ -51,7 +51,7 @@
     baseurl: https://packagecloud.io/slacktechnologies/slack/fedora/36/x86_64
     gpgkey: https://slack.com/gpg/slack_pubkey_20210901.gpg
     gpgcheck: 1
-    enabled: 1
+    enabled: 0
     sslverify: 1
   when: ansible_distribution == 'Fedora'
 
@@ -63,7 +63,7 @@
     baseurl: http://pkg.jenkins.io/redhat
     gpgkey: https://pkg.jenkins.io/redhat/jenkins.io.key
     gpgcheck: 1
-    enabled: 1
+    enabled: 0
   when: ansible_distribution == 'Fedora'
 
 - name: Add Docker Repo
@@ -94,7 +94,7 @@
     baseurl: https://brave-browser-rpm-release.s3.brave.com/$basearch
     gpgkey: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
     gpgcheck: 1
-    enabled: 1
+    enabled: 0
   when: ansible_distribution == 'Fedora'
 
 - name: Install laptop packages
@@ -105,11 +105,9 @@
     - keepassxc
     - syncthing
     - gimp
-    - deja-dup
     - remmina
     - awesome-vim-colorschemes
     - Zim
-    - devilspie2
     - texstudio
     - recoll
     - fzf
@@ -133,8 +131,6 @@
     - proxychains-ng
     - torbrowser-launcher
     - firewall-config
-    - java-1.8.0-openjdk
-    - java-1.8.0-openjdk-devel
     - ewftools
     - evtest
     - python-xdot
@@ -202,7 +198,6 @@
     - xdotool
     - gnome-extensions-app
     - banner
-    - playonlinux
     - hashcat
     - arc-theme
     - thunderbird
@@ -244,7 +239,6 @@
     - pinta
     - gthumb
     - xsane
-    - xsane-gimp
     - pulseeffects
     - ripgrep
     - nbtscan
@@ -272,9 +266,6 @@
     - python3-notebook
     - python3-idle
     - python3-spyder
-    - task
-    - vit
-    - tasksh
     - lftp
     - filezilla
     - ckermit
@@ -291,11 +282,9 @@
     - ddrescue
     - python3-qt5-webengine
     - pcsc-tools
-    - taskd
     - sigil
     - buku
     - md5deep
-    - hugo
     - nodejs-npm
     - v4l-utils
     - xournalpp
@@ -379,6 +368,17 @@
     - brave-browser
     - brave-keyring
     - helix
+    - xsane-gimp
+    - java-1.8.0-openjdk
+    - java-1.8.0-openjdk-devel
+    - task
+    - vit
+    - tasksh
+    - taskd
+    - devilspie2
+    - deja-dup
+    - hugo
+    - playonlinux
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
