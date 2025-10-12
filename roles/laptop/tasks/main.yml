@@ -1,3 +1,15 @@
+- name: Add Vivaldi Repo
+  become: yes
+  yum_repository:
+    name: vivaldi
+    description: vivaldi
+    baseurl: https://repo.vivaldi.com/archive/rpm/x86_64
+    gpgkey: https://repo.vivaldi.com/archive/linux_signing_key.pub
+    gpgcheck: 1
+    repo_gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
 - name: Add Virtualbox Repo
   become: yes
   yum_repository:
@@ -314,6 +326,8 @@
     - yubikey-manager-qt
     - qpdf
     - ffuf
+    - restic
+    - vivaldi
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
