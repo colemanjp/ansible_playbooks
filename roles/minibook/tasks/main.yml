@@ -1,3 +1,15 @@
+- name: Add Vivaldi Repo
+  become: yes
+  yum_repository:
+    name: vivaldi
+    description: vivaldi
+    baseurl: https://repo.vivaldi.com/archive/rpm/x86_64
+    gpgkey: https://repo.vivaldi.com/archive/linux_signing_key.pub
+    gpgcheck: 1
+    repo_gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
 - name: Add Dropbox Repo
   become: yes
   yum_repository:
@@ -35,5 +47,6 @@
     - htop
     - nautilus-dropbox
     - python3-gpg
+    - vivaldi
     state: installed
   when: ansible_distribution == 'Fedora'
