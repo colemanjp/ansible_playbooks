@@ -40,9 +40,6 @@
     - openldap-devel
     - zsh
     - libxslt-devel
-    - postgresql
-    - postgresql-server
-    - postgresql-contrib
     - libxml2-devel
     - libxslt-devel
     - libxml++-devel
@@ -55,7 +52,6 @@
     - tmux
     - fping
     - hydra
-    - postgresql-upgrade
     - fpdns
     - xsel
     - net-snmp-utils
@@ -99,6 +95,7 @@
     - btop
     - mc
     - asnip
+    - neovim
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -106,8 +103,10 @@
   become: yes
   dnf:
     name:
-    - neovim-ale
-    - neovim
+    - postgresql
+    - postgresql-server
+    - postgresql-contrib
+    - postgresql-upgrade
     state: absent
   when: ansible_distribution == 'Fedora'
 
