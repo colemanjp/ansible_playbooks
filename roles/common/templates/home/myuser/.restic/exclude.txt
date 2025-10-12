@@ -25,5 +25,6 @@ Downloads/*.tgz
 Downloads/*.tar
 Downloads/*.7z
 Downloads/*.rpm
+VirtualBox\ VMs/nobackup
 vmware/nobackup
 Trash
