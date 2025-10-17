@@ -113,6 +113,7 @@
         - btop
         - ripgrep
         - python3-django-environ
+        - mcp-kali-server
     state: present
   when: ansible_distribution == 'Kali'
 
