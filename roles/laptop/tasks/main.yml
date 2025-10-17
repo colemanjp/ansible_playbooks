@@ -213,7 +213,6 @@
     - arc-theme
     - thunderbird
     - retext 
-    - gcc-go
     - golang-bin
     - ncurses-devel
     - rtl-sdr-devel
@@ -392,9 +391,20 @@
     - deja-dup
     - hugo
     - playonlinux
+    - gcc-go
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
+
+- name: "Install multiple tools with go install for {{ myuser }}"
+  become_user: "{{ myuser }}"
+  become: true
+  loop:
+     - github.com/sensepost/gowitness@latest
+  shell: go install {{ item }}
+  when: ansible_distribution == 'Fedora'
+  loop_control:
+     label: "{{ item.split('/')[2] }}"
 
 #- name: "Install logseq flatpak for {{ myuser }}"
 #  become: yes
