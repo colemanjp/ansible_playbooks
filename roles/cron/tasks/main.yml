@@ -16,6 +16,5 @@
 - name: "task sync for {{ myuser }}"
   ansible.builtin.cron:
     name: "task sync"
-    minute: "58"
-    job: "/usr/bin/task sync > /dev/null 2>&1"
     user: "{{ myuser }}"
+    state: absent
