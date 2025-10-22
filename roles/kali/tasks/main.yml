@@ -7,6 +7,7 @@
   args:
     creates: /etc/apt/keyrings/docker.gpg
   become: yes
+  ignore_errors: yes
   when: ansible_distribution == 'Kali'
 
 - name: Add Docker repository
@@ -14,6 +15,7 @@
     repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian trixie stable"
     state: present
   become: yes
+  ignore_errors: yes
   when: ansible_distribution == 'Kali'
 
 - name: Kali uninstall packages
@@ -68,13 +70,6 @@
         - neovim
         - jq
         - fzf 
-        # Start docker.com packages
-        - docker-ce
-        - docker-ce-cli
-        - containerd.io
-        - docker-buildx-plugin
-        - docker-compose-plugin
-        # End docker.com packages
         - uidmap
         - xsel
         - xdot
@@ -114,6 +109,21 @@
         - ripgrep
         - python3-django-environ
         - mcp-kali-server
+        - rsync
+        - curl
+    state: present
+  when: ansible_distribution == 'Kali'
+
+- name: Kali install packages from docker.com
+  become: yes
+  ignore_errors: yes
+  apt:
+    name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
     state: present
   when: ansible_distribution == 'Kali'
 
@@ -139,11 +149,25 @@
     state: present
   when: ansible_distribution == 'Kali'
 
-- name: "Change {{ myuser }} shell to bash and add to kali-trusted and vboxsf groups"
+- name: Add kali-trusted group
+  ansible.builtin.group:
+    name: kali-trusted
+    gid: 117
+    state: present
+  when: ansible_distribution == 'Kali'
+
+- name: Add docker group
+  ansible.builtin.group:
+    name: docker
+    gid: 995
+    state: present
+  when: ansible_distribution == 'Kali'
+
+- name: "Change {{ myuser }} shell to bash and add to kali-trusted, vboxsf, and docker groups"
   ansible.builtin.user:
     name: "{{ myuser }}" 
     shell: /bin/bash
-    groups: kali-trusted,vboxsf
+    groups: kali-trusted,vboxsf,docker
     append: yes
   when: ansible_distribution == 'Kali'
 
