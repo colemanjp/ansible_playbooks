@@ -225,7 +225,6 @@
     - dmenu 
     - xbacklight 
     - feh 
-    - conky
     - sslscan
     - pandoc
     - darktable
@@ -326,6 +325,7 @@
     - ffuf
     - restic
     - vivaldi
+    - hardinfo2
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
@@ -392,6 +392,7 @@
     - hugo
     - playonlinux
     - gcc-go
+    - conky
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
