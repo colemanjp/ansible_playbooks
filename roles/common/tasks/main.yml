@@ -193,7 +193,7 @@
 - name: Copy gf-patterns to .gf
   become: yes
   become_user: "{{ myuser }}"
-  #ansible.builtin.copy:
+  ignore_errors: yes
   ansible.posix.synchronize:
     src: home/myuser/gf-patterns/
     dest: "/home/{{ myuser }}/.gf"
