@@ -11,6 +11,7 @@ Code Cache
 .dropbox
 .dropbox-dist
 .local/share/containers/storage/overlay
+.local/share/docker/fuse-overlayfs
 .local/share/docker/overlay2
 .local/share/docker/volumes
 .local/share/flatpak
