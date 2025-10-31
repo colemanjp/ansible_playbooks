@@ -111,6 +111,14 @@
         - mcp-kali-server
         - rsync
         - curl
+        - dirb
+        - nikto
+        - nmap
+        - proxychains4
+        - privoxy
+        - whatweb
+        - pipx
+        - naabu
     state: present
   when: ansible_distribution == 'Kali'
 
