@@ -87,15 +87,16 @@
     - speedtest-cli
     - at
     - telnet
-    - vim-ale
     - distribution-gpg-keys
     - kitty 
     - zstd
     - fish
     - btop
     - mc
-    - asnip
     - neovim
+    - net-tools
+    - lsof
+    - s-nail
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -107,6 +108,8 @@
     - postgresql-server
     - postgresql-contrib
     - postgresql-upgrade
+    - asnip
+    - vim-ale
     state: absent
   when: ansible_distribution == 'Fedora'
 
@@ -158,6 +161,13 @@
     name: "{{ myuser }}"
     groups: wireshark
     append: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Set authorized key for {{ myuser }} copying it from current user
+  ansible.posix.authorized_key:
+    user: "{{ myuser }}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
   when: ansible_distribution == 'Fedora'
 
 - name: "Debian add the user {{ myuser }}"
