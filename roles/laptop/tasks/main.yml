@@ -32,6 +32,17 @@
     enabled: 0
   when: ansible_distribution == 'Fedora'
 
+- name: Add Vscode Repo
+  become: yes
+  yum_repository:
+    name: code
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
 - name: Add Dropbox Repo
   become: yes
   yum_repository:
@@ -326,6 +337,7 @@
     - restic
     - vivaldi
     - hardinfo2
+    - code
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
