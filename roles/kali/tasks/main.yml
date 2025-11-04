@@ -119,6 +119,13 @@
         - whatweb
         - pipx
         - naabu
+        - getsploit
+        - metasploit-framework
+        - exploitdb
+        - gemini-cli
+        - xmlstarlet
+        - wordlists
+        - ldap-utils
     state: present
   when: ansible_distribution == 'Kali'
 
@@ -169,6 +176,13 @@
     name: docker
     gid: 995
     state: present
+  when: ansible_distribution == 'Kali'
+
+- name: Set authorized key for {{ myuser }} copying it from current user
+  ansible.posix.authorized_key:
+    user: "{{ myuser }}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
   when: ansible_distribution == 'Kali'
 
 - name: "Change {{ myuser }} shell to bash and add to kali-trusted, vboxsf, and docker groups"
