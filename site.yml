@@ -17,6 +17,7 @@
   - fail2ban
   - logwatch
   - firewalld
+  - named-chroot
 
 - hosts: kali
   roles:
