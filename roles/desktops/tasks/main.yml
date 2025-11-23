@@ -1,4 +1,19 @@
 ---
+- name: Add VSCode GPG key
+  become: yes
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    dest: /etc/apt/keyrings/microsoft.asc
+  when: ansible_distribution == 'Debian'
+
+- name: Add VSCode repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/code stable main"
+    state: present
+    filename: vscode
+  when: ansible_distribution == 'Debian'
+
 - name: Desktops Debian install packages
   become: yes
   apt: 
@@ -11,6 +26,7 @@
         - qemu-system
         - libvirt-daemon-system
         - xsel
+        - code
     state: present
   when: ansible_distribution == 'Debian'
 
