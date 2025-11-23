@@ -18,6 +18,24 @@
   ignore_errors: yes
   when: ansible_distribution == 'Kali'
 
+- name: Download and install Syncthing GPG key
+  ansible.builtin.shell: |
+    curl -fsSL https://syncthing.net/release-key.gpg | gpg --dearmor -o /etc/apt/keyrings/syncthing.gpg
+    chmod a+r /etc/apt/keyrings/syncthing.gpg
+  args:
+    creates: /etc/apt/keyrings/syncthing.gpg
+  become: yes
+  ignore_errors: yes
+  when: ansible_distribution == 'Kali'
+
+- name: Add Syncthing repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/syncthing.gpg] https://apt.syncthing.net/ syncthing stable"
+    state: present
+  become: yes
+  ignore_errors: yes
+  when: ansible_distribution == 'Kali'
+
 - name: Kali uninstall packages
   become: yes
   apt: 
@@ -41,7 +59,7 @@
     cache_valid_time: 86400 #1 day
     name:
         - zim 
-        - syncthing 
+        - syncthing
         - seclists 
         - sslscan
         - python3-venv 
@@ -92,6 +110,7 @@
         - zaproxy
         - mongo-tools
         - jupyter
+        - python3-pandas
         - xterm
         - xrdp
         - autocutsel
@@ -126,6 +145,10 @@
         - xmlstarlet
         - wordlists
         - ldap-utils
+        - whois
+        - subjack
+        - assetfinder
+        - iftop
     state: present
   when: ansible_distribution == 'Kali'
 
@@ -152,11 +175,21 @@
     - github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
     - github.com/tomnomnom/qsreplace@latest
     - github.com/tomnomnom/gf@latest
+    - github.com/tomnomnom/waybackurls@latest
     - github.com/projectdiscovery/httpx/cmd/httpx@latest
+    - github.com/lc/gau/v2/cmd/gau@latest
+    - github.com/lc/subjs@latest
+    - github.com/bitquark/shortscan/cmd/shortscan@latest
   shell: go install {{ item }}
   when: ansible_distribution == 'Kali'
   loop_control:
     label: "{{ item.split('/')[2] }}"
+
+- name: Install euporie with pipx
+  become_user: "{{ myuser }}"
+  become: true
+  community.general.pipx:
+    name: euporie
 
 - name: Add vboxsf group
   ansible.builtin.group:
@@ -176,6 +209,7 @@
     name: docker
     gid: 995
     state: present
+  ignore_errors: yes
   when: ansible_distribution == 'Kali'
 
 - name: Set authorized key for {{ myuser }} copying it from current user
