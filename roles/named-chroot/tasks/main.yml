@@ -1,0 +1,61 @@
+---
+
+- name: Create masters directory
+  file: path="/var/named/chroot/var/named/masters" state=directory owner="root" group="named" mode=0775
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: Create data directory
+  file: path="/var/named/chroot/var/named/data" state=directory owner="named" group="named" mode=0755
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: Kdyndns key
+  become: yes
+  ansible.builtin.copy: 
+    src: var/named/chroot/etc/Kdyndns.+157+48376.key
+    dest: /var/named/chroot/etc/Kdyndns.+157+48376.key
+    owner: root
+    group: root
+    mode: '0600'
+    backup: yes
+  notify:
+  - restart named-chroot
+  when: 
+
+- name: Kdyndns private
+  become: yes
+  ansible.builtin.copy: 
+    src: var/named/chroot/etc/Kdyndns.+157+48376.private
+    dest: /var/named/chroot/etc/Kdyndns.+157+48376.private
+    owner: root
+    group: root
+    mode: '0600'
+    backup: yes
+  notify:
+  - restart named-chroot
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: named.conf
+  become: yes
+  ansible.builtin.copy: 
+    src: var/named/chroot/etc/named.conf
+    dest: /var/named/chroot/etc/named.conf
+    owner: root
+    group: named
+    mode: '0644'
+    backup: no
+  notify:
+  - restart named-chroot
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: Enable service named-chroot and start it
+  ansible.builtin.service:
+    name: named-chroot
+    enabled: yes
+    state: started
+  ignore_errors: true
+  when: 
+    - inventory_hostname in groups["vps"]
