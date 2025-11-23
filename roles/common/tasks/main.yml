@@ -113,6 +113,17 @@
     state: absent
   when: ansible_distribution == 'Fedora'
 
+- name: "Install multiple tools with go install for {{ myuser }}"
+  become_user: "{{ myuser }}"
+  become: true
+  loop:
+     # gowitness 3.0.5
+     - github.com/sensepost/gowitness@6b0000e
+  shell: go install {{ item }}
+  when: ansible_distribution == 'Fedora'
+  loop_control:
+     label: "{{ item.split('/')[2] }}"
+
 - name: Debian install common packages
   apt: 
     update_cache: yes
