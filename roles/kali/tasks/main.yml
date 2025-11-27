@@ -185,11 +185,13 @@
   loop_control:
     label: "{{ item.split('/')[2] }}"
 
-- name: Install euporie with pipx
+- name: Install packages with pipx
   become_user: "{{ myuser }}"
   become: true
   community.general.pipx:
-    name: euporie
+    name: "{{ item.name }}"
+  loop:
+    - name: euporie
 
 - name: Add vboxsf group
   ansible.builtin.group:
