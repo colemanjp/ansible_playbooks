@@ -7,7 +7,7 @@
     state: installed
   when: ansible_distribution == 'Fedora'
 
-- name: Logwatch logwatch.conf update
+- name: Logwatch logwatch.conf
   become: yes
   template: src=etc/logwatch/logwatch.conf.j2
     dest=/etc/logwatch/logwatch.conf
@@ -15,10 +15,24 @@
     owner=0 group=0 mode=0444
   when: ansible_distribution == 'Fedora'
 
-- name: Logwatch services/sshd.conf update
+- name: Logwatch scripts/services/sshd.conf
   become: yes
   template: src=etc/logwatch/scripts/services/sshd.conf.j2
     dest=/etc/logwatch/scripts/services/sshd.conf
     backup=no
     owner=0 group=0 mode=0444
+  when: ansible_distribution == 'Fedora'
+
+- name: Logwatch conf/services
+  become: yes
+  template:
+    src: "etc/logwatch/conf/services/{{ item }}.conf"
+    dest: "/etc/logwatch/conf/services/{{ item }}.conf"
+    backup: no
+    owner: 0
+    group: 0
+    mode: 0444
+  loop:
+    - sshd
+    - sendmail
   when: ansible_distribution == 'Fedora'
