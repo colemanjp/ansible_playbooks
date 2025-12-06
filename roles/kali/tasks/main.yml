@@ -149,6 +149,7 @@
         - subjack
         - assetfinder
         - iftop
+        - waymore
     state: present
   when: ansible_distribution == 'Kali'
 
