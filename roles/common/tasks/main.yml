@@ -10,7 +10,6 @@
     - sendmail-doc
     - opendkim
     - bind-chroot
-    - cyrus-imapd
     - git
     - mutt
     - msmtp
@@ -110,6 +109,7 @@
     - postgresql-upgrade
     - asnip
     - vim-ale
+    - cyrus-imapd
     state: absent
   when: ansible_distribution == 'Fedora'
 
