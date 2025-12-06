@@ -340,6 +340,8 @@
     - code
     - xmlstarlet
     - glow
+    - pdftk-java
+    - openbao
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
