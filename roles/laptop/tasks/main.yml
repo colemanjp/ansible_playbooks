@@ -342,6 +342,7 @@
     - glow
     - pdftk-java
     - openbao
+    - ncdu
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
