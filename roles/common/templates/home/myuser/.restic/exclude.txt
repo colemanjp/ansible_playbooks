@@ -20,14 +20,7 @@ Code Cache
 .zoom
 *.iso
 *.ova
-Downloads/*.zip
-Downloads/*.vmdk
-Downloads/*.gz
-Downloads/*.tgz
-Downloads/*.tar
-Downloads/*.7z
-Downloads/*.rpm
-Downloads/*.hc
+$HOME/Downloads
 VirtualBox\ VMs/nobackup
 vmware/nobackup
 Trash
