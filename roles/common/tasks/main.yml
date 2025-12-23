@@ -1,4 +1,9 @@
 ---
+- name: "Debian and Fedora add the user {{ myuser }}"
+  ansible.builtin.user:
+    name: "{{ myuser }}"
+  when: ansible_distribution in ['Debian', 'Fedora']
+
 - name: Fedora install common packages
   become: yes
   dnf: 
@@ -9,6 +14,7 @@
     - sendmail-cf
     - sendmail-doc
     - opendkim
+    - cyrus-sasl-plain
     - bind-chroot
     - git
     - mutt
@@ -75,12 +81,10 @@
     - zmap
     - rust
     - cargo 
-    - ike-scan
     - xorg-x11-xauth
     - awscli
     - dnsx
     - subfinder
-    - assetfinder
     - ngrep
     - wireshark-cli
     - speedtest-cli
@@ -96,6 +100,8 @@
     - net-tools
     - lsof
     - s-nail
+    - abduco
+    - dvtm
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -180,11 +186,6 @@
     state: present
     key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
   when: ansible_distribution == 'Fedora'
-
-- name: "Debian add the user {{ myuser }}"
-  ansible.builtin.user:
-    name: "{{ myuser }}"
-  when: ansible_distribution == 'Debian'
 
 - name: Create .aws directory
   file: path="/home/{{ myuser }}/.aws" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
