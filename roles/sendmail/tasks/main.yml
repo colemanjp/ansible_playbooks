@@ -5,6 +5,15 @@
     name: sendmail
     enabled: yes
     state: started
+  ignore_errors: true
+
+- name: Enable service saslauthd and start it on vps
+  ansible.builtin.service:
+    name: saslauthd
+    enabled: yes
+    state: started
+  when: 
+  - inventory_hostname in groups["vps"]
 
 - name: sendmail configuration file update
   become: yes
@@ -14,6 +23,7 @@
     owner=0 group=0 mode=0400
   notify:
   - restart sendmail
+
 - name: local-host-names update
   become: yes
   template: src=etc/mail/local-host-names.{{inventory_hostname}}.j2
@@ -31,3 +41,82 @@
     backup: yes
   notify:
   - newaliases
+
+- name: Enable service opendkim and start it
+  ansible.builtin.service:
+    name: opendkim
+    enabled: yes
+    state: started
+  ignore_errors: true
+  when: 
+    - inventory_hostname in groups["vps"]
+
+- name: opendkim.conf
+  become: yes
+  ansible.builtin.copy: 
+    src: etc/opendkim.conf
+    dest: /etc/opendkim.conf
+    owner: root
+    group: opendkim
+    mode: '0644'
+    backup: yes
+  notify:
+  - restart opendkim
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: opendkim KeyTable
+  become: yes
+  ansible.builtin.copy: 
+    src: etc/opendkim/KeyTable
+    dest: /etc/opendkim/KeyTable
+    owner: root
+    group: opendkim
+    mode: '0640'
+    backup: yes
+  notify:
+  - restart opendkim
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: opendkim SigningTable
+  become: yes
+  ansible.builtin.copy: 
+    src: etc/opendkim/SigningTable
+    dest: /etc/opendkim/SigningTable
+    owner: root
+    group: opendkim
+    mode: '0640'
+    backup: yes
+  notify:
+  - restart opendkim
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: opendkim keys default.private
+  become: yes
+  ansible.builtin.copy: 
+    src: etc/opendkim/keys/default.private
+    dest: /etc/opendkim/keys/default.private
+    owner: root
+    group: opendkim
+    mode: '0640'
+    backup: yes
+  notify:
+  - restart opendkim
+  when: 
+  - inventory_hostname in groups["vps"]
+
+- name: opendkim keys default.txt
+  become: yes
+  ansible.builtin.copy: 
+    src: etc/opendkim/keys/default.txt
+    dest: /etc/opendkim/keys/default.txt
+    owner: root
+    group: opendkim
+    mode: '0644'
+    backup: yes
+  notify:
+  - restart opendkim
+  when: 
+  - inventory_hostname in groups["vps"]
