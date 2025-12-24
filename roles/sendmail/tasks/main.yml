@@ -35,9 +35,20 @@
 - name: sendmail aliases update root
   ansible.builtin.lineinfile:
     path: /etc/aliases
-    regexp: '^(.*)root:(.*)'
+    regexp: '^root:'
     line: "root:{{ myuser }}"
     backup: yes
+  notify:
+  - newaliases
+
+- name: sendmail aliases update on vps4
+  ansible.builtin.lineinfile:
+    path: /etc/aliases
+    regexp: '^{{ item.alias }}:'
+    line: "{{ item.alias }}:{{ item.target }}"
+    backup: yes
+  loop: "{{ vps4_aliases }}"
+  when: inventory_hostname in ['vps4']
   notify:
   - newaliases
 
