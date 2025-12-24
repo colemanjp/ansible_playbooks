@@ -5,7 +5,6 @@
     name: sendmail
     enabled: yes
     state: started
-  ignore_errors: true
 
 - name: Enable service saslauthd and start it on vps
   ansible.builtin.service:
