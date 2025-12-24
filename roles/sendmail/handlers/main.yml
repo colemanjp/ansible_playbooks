@@ -1,10 +1,8 @@
 - name: restart sendmail
   service: name=sendmail state=restarted
-  ignore_errors: true
 
 - name: restart opendkim
   service: name=opendkim state=restarted
-  ignore_errors: true
 
 - name: newaliases
   ansible.builtin.command: /usr/bin/newaliases
