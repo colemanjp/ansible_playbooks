@@ -6,15 +6,11 @@
     enabled: yes
     state: started
 
-- name: "anacron for {{ myuser }}"
+- name: "anacron for {{ myuser }} on laptops"
   ansible.builtin.cron:
     name: "anacron"
     minute: "57"
     job: "/usr/sbin/anacron -t $HOME/.anacron/etc/anacrontab -S $HOME/.anacron/var/spool/anacron"
     user: "{{ myuser }}"
-
-- name: "task sync for {{ myuser }}"
-  ansible.builtin.cron:
-    name: "task sync"
-    user: "{{ myuser }}"
-    state: absent
+  when:
+    inventory_hostname in groups["laptops"]
