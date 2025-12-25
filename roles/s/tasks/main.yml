@@ -1,0 +1,48 @@
+---
+
+- name: Create /usr/local/s directories
+  ansible.builtin.file:
+     path: "{{ item }}"
+     state: directory
+     mode: '0755'
+     owner: root
+     group: root
+  loop:
+     - /usr/local/s/internet_daily/output
+     - /usr/local/s/internet_weekly/output
+     - /usr/local/s/scripts
+
+- name: Copy s/internet_daily files
+  ansible.builtin.copy:
+     src: "internet_daily/{{ item }}"
+     dest: "/usr/local/s/internet_daily/{{ item }}"
+     owner: root
+     group: root
+     mode: '0644'
+  loop:
+     - include.txt
+     - mass.cfg
+
+- name: Copy s/internet_weekly files
+  ansible.builtin.copy:
+     src: "internet_weekly/{{ item }}"
+     dest: "/usr/local/s/internet_weekly/{{ item }}"
+     owner: root
+     group: root
+     mode: '0644'
+  loop:
+     - include.txt
+     - mass.cfg
+
+- name: Copy s/scripts files
+  ansible.builtin.copy:
+     src: "scripts/{{ item.name }}"
+     dest: "/usr/local/s/scripts/{{ item.name }}"
+     owner: root
+     group: root
+     mode: "{{ item.mode }}"
+  loop:
+     - { name: exclude.txt, mode: '0644' }
+     - { name: mass2nmap.sh, mode: '0755' }
+     - { name: mass_all.sh, mode: '0755' }
+     - { name: mass_w_diff.sh, mode: '0755' }
