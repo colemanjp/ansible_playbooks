@@ -29,6 +29,17 @@
     - sendmail
   when: ansible_distribution == 'Fedora'
 
+- name: Logwatch scripts/services
+  ansible.builtin.copy:
+    src: "etc/logwatch/scripts/services/{{ item }}"
+    dest: "/etc/logwatch/scripts/services/{{ item }}"
+    owner: root
+    group: root
+    mode: 0555
+    backup: no
+  loop:
+    - sshd
+
 - name: Remove obsolete scripts/services/sshd.conf
   ansible.builtin.file:
     path: /etc/logwatch/scripts/services/sshd.conf
