@@ -11,13 +11,15 @@
   - sendmail
   - firewalld
 
-- hosts: servers
+- hosts: vps
   roles:
-  - sendmail
-  - fail2ban
-  - logwatch
-  - firewalld
-  - named-chroot
+    - { role: sendmail, tags: sendmail}
+    - fail2ban
+    - { role: logwatch, tags: logwatch }
+    - firewalld
+    - named-chroot
+    - { role: cron, tags: cron }
+    - { role: s, tags: s }
 
 - hosts: kali
   roles:
