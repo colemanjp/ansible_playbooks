@@ -1,6 +1,6 @@
 # Ansible Playbooks
 
-This isn't beautiful production ready code, but it serves to run a scalable zoo of personal machines. Secrets are encrypted with ansible vault.
+Secrets are encrypted with ansible vault.
 
 ## Running 
 
@@ -12,11 +12,11 @@ Run WSL playbook from WSL using a local connection `ansible-playbook roles/wsl/t
 
 ## group_vars
 
-all.yml and kali.yml each contain one variable: `myuser`
+all.yml and kali.yml are encrypted and contain the important `myuser` variable and some mail aliases
 
 ## OS
 
-- servers and laptops are Fedora
+- vps and laptops are Fedora
 - axiom and proxmox are Debian
 - kali is Kali
 - wsl is Kali running on wsl
