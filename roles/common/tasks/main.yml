@@ -190,7 +190,7 @@
 - name: Create .aws directory
   file: path="/home/{{ myuser }}/.aws" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when: 
-    - inventory_hostname not in groups["servers"]
+    - inventory_hostname not in groups["vps"]
     - inventory_hostname not in groups["kali"]
 
 - name: aws config
@@ -199,7 +199,7 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when: 
-    - inventory_hostname not in groups["servers"]
+    - inventory_hostname not in groups["vps"]
     - inventory_hostname not in groups["kali"]
 
 
@@ -209,7 +209,7 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when: 
-    - inventory_hostname not in groups["servers"]
+    - inventory_hostname not in groups["vps"]
     - inventory_hostname not in groups["kali"]
 
 - name: Copy gf-patterns to .gf
