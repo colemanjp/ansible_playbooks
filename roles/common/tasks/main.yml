@@ -102,6 +102,9 @@
     - s-nail
     - abduco
     - dvtm
+    - fira-code-fonts
+    - jetbrains-mono-fonts-all
+    - age
     state: installed
   when: ansible_distribution == 'Fedora'
 
@@ -143,6 +146,7 @@
     - git
     - kitty
     - neovim
+    - age
     state: present
   when: ansible_distribution == 'Debian'
 
