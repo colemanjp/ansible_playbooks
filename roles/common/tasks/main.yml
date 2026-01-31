@@ -1,8 +1,8 @@
 ---
-- name: "Debian and Fedora add the user {{ myuser }}"
+- name: "Debian and Fedora and Kali add the user {{ myuser }}"
   ansible.builtin.user:
     name: "{{ myuser }}"
-  when: ansible_distribution in ['Debian', 'Fedora']
+  when: ansible_distribution in ['Debian', 'Fedora', 'Kali']
 
 - name: Fedora install common packages
   become: yes
