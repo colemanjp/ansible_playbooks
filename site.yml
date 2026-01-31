@@ -1,18 +1,19 @@
 ---
 - hosts: all
   roles:
-  - common
 
 - hosts: laptops
   roles:
-  - laptop
-  - logwatch
-  - cron
-  - sendmail
-  - firewalld
+    - common
+    - laptop
+    - logwatch
+    - cron
+    - sendmail
+    - firewalld
 
 - hosts: vps
   roles:
+    - common
     - { role: sendmail, tags: sendmail}
     - fail2ban
     - { role: logwatch, tags: logwatch }
@@ -23,20 +24,25 @@
 
 - hosts: kali
   roles:
-  - kali
+    - common
+    - kali
 
 - hosts: axiom
   roles:
-  - axiom
+    - common
+    - axiom
 
 - hosts: proxmox
   roles:
-  - proxmox
+    - common
+    - proxmox
 
 - hosts: minibook
   roles:
-  - minibook
+    - common
+    - minibook
 
 - hosts: desktops
   roles:
-  - desktops
+    - common
+    - desktops
