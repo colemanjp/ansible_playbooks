@@ -1,18 +1,18 @@
 ---
-- name: Add VSCode GPG key
-  become: yes
-  ansible.builtin.get_url:
-    url: https://packages.microsoft.com/keys/microsoft.asc
-    dest: /etc/apt/keyrings/microsoft.asc
-  when: ansible_distribution == 'Debian'
+#- name: Add VSCode GPG key
+#  become: yes
+#  ansible.builtin.get_url:
+#    url: https://packages.microsoft.com/keys/microsoft.asc
+#    dest: /etc/apt/keyrings/microsoft.asc
+#  when: ansible_distribution == 'Debian'
 
-- name: Add VSCode repository
-  become: yes
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/code stable main"
-    state: present
-    filename: vscode
-  when: ansible_distribution == 'Debian'
+#- name: Add VSCode repository
+#  become: yes
+#  ansible.builtin.apt_repository:
+#    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/microsoft.asc] https://packages.microsoft.com/repos/code stable main"
+#    state: present
+#    filename: vscode
+#  when: ansible_distribution == 'Debian'
 
 - name: Desktops Debian install packages
   become: yes
@@ -26,7 +26,11 @@
         - qemu-system
         - libvirt-daemon-system
         - xsel
-        - code
+#        - code
+        - golang-go
+        - dmidecode
+        - python3-venv
+        - libfuse2t64
     state: present
   when: ansible_distribution == 'Debian'
 
@@ -40,6 +44,16 @@
         - wayvnc
     state: absent
   when: ansible_distribution == 'Debian'
+
+- name: Install multiple tools with go install
+  become_user: "{{ myuser }}"
+  become: true
+  loop:
+    - github.com/sensepost/gowitness@latest
+  shell: go install {{ item }}
+  when: ansible_distribution == 'Debian'
+  loop_control:
+    label: "{{ item.split('/')[2] }}"
 
 - name: Desktops Debian enable service ssh and start it
   ansible.builtin.service:
