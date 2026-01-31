@@ -1,5 +1,4 @@
 ---
-
 - name: Download and install Docker GPG key
   ansible.builtin.shell: |
     curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -49,6 +48,7 @@
         - containerd
         - runc
         # End remove distribution docker
+        - subfinder
     state: absent
   when: ansible_distribution == 'Kali'
 
@@ -91,7 +91,6 @@
         - uidmap
         - xsel
         - xdot
-        - subfinder
         - httprobe
         - shellcheck
         - magic-wormhole
@@ -150,6 +149,9 @@
         - assetfinder
         - iftop
         - waymore
+        - hexstrike-ai
+        - metasploit-framework
+        - getallurls
     state: present
   when: ansible_distribution == 'Kali'
 
@@ -181,6 +183,8 @@
     - github.com/lc/gau/v2/cmd/gau@latest
     - github.com/lc/subjs@latest
     - github.com/bitquark/shortscan/cmd/shortscan@latest
+    - github.com/bitquark/shortscan/cmd/shortutil@latest
+    - github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
   shell: go install {{ item }}
   when: ansible_distribution == 'Kali'
   loop_control:
@@ -193,6 +197,8 @@
     name: "{{ item.name }}"
   loop:
     - name: euporie
+    - name: mcpo
+    - name: gradio
 
 - name: Add vboxsf group
   ansible.builtin.group:
