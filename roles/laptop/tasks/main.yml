@@ -130,7 +130,6 @@
     - remmina
     - awesome-vim-colorschemes
     - Zim
-    - texstudio
     - recoll
     - fzf
     - vim-X11
@@ -168,6 +167,7 @@
     - d-feet
     - qqc2-desktop-style
     - okular
+    - texstudio
     - texlive-overpic
     - texlive-cheatsheet
     - texlive-libertine
@@ -190,6 +190,10 @@
     - texlive-framed
     - texlive-metalogo
     - texlive-titling
+    - texlive-tikz-kalender
+    - latexmk
+    - zathura
+    - zathura-plugins-all
     - adobe-source-sans-pro-fonts
     - mozilla-fira-sans-fonts
     - mozilla-fira-mono-fonts
