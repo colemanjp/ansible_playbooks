@@ -185,6 +185,7 @@
     - github.com/bitquark/shortscan/cmd/shortscan@latest
     - github.com/bitquark/shortscan/cmd/shortutil@latest
     - github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+    - github.com/projectdiscovery/katana/cmd/katana@latest
   shell: go install {{ item }}
   when: ansible_distribution == 'Kali'
   loop_control:
