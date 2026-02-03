@@ -145,7 +145,6 @@
     - cronie-anacron
     - jq
     - unrtf
-    - python-epub
     - antiword
     - tesseract
     - keychain
@@ -200,7 +199,6 @@
     - mozilla-fira-sans-fonts
     - mozilla-fira-mono-fonts
     - lshw
-    - python3-csvkit
     - clamav
     - clamav-update
     - cabextract
@@ -229,7 +227,6 @@
     - hashcat
     - arc-theme
     - thunderbird
-    - retext 
     - golang-bin
     - ncurses-devel
     - rtl-sdr-devel
@@ -416,6 +413,9 @@
     - playonlinux
     - gcc-go
     - conky
+    - python-epub
+    - python3-csvkit
+    - retext
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
