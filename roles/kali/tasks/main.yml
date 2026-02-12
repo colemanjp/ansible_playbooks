@@ -49,6 +49,7 @@
         - runc
         # End remove distribution docker
         - subfinder
+        - keepassxc 
     state: absent
   when: ansible_distribution == 'Kali'
 
@@ -68,7 +69,6 @@
         - spyder
         - sublist3r 
         - awscli 
-        - keepassxc 
         - golang 
         - gobuster 
         - oscanner 
@@ -152,6 +152,8 @@
         - hexstrike-ai
         - metasploit-framework
         - getallurls
+        - keepass2
+        - maven
     state: present
   when: ansible_distribution == 'Kali'
 
