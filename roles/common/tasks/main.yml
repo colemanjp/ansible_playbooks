@@ -177,12 +177,21 @@
   - restart sshd
   when: ansible_distribution == 'Fedora'
 
-- name: "Fedora add {{ myuser }} to wireshark group"
+- name: Gather existing groups
+  ansible.builtin.getent:
+    database: group
+  when: ansible_distribution == 'Fedora'
+
+- name: "Add {{ myuser }} to existing groups"
   ansible.builtin.user:
     name: "{{ myuser }}"
-    groups: wireshark
+    groups: "{{ item }}"
     append: yes
-  when: ansible_distribution == 'Fedora'
+  loop:
+    - wireshark
+  when:
+    - ansible_distribution == 'Fedora'
+    - item in (getent_group | default({}))
 
 - name: Set authorized key for {{ myuser }} copying it from current user
   ansible.posix.authorized_key:
@@ -227,7 +236,7 @@
       - "--exclude=.git"
       - "--exclude=README.md"
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Git clone reconftw repo
   become: yes
@@ -235,12 +244,12 @@
   git: repo=https://github.com/six2dez/reconftw.git dest="/home/{{ myuser }}/reconftw"
   ignore_errors: yes
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Create Recon directory
   file: path="/home/{{ myuser }}/reconftw/Recon" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
     
 - name: install reconftw.cfg
   template: src=home/myuser/reconftw/reconftw.cfg
@@ -248,12 +257,12 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Create Tools directory
   file: path="/home/{{ myuser }}/Tools" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Manage github tokens in Tools directory
   template: src="home/myuser/Tools/.github_tokens"
@@ -261,7 +270,7 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Manage github tokens in reconftw directory
   template: src="home/myuser/Tools/.github_tokens"
@@ -269,11 +278,12 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
+
 - name: Create .config/amass directory 
   file: path="/home/{{ myuser }}/.config/amass" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0755
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Manage amass config.ini
   template: src=home/myuser/.config/amass/config.ini
@@ -281,7 +291,7 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Manage amass config.ini inside reconftw
   template: src=home/myuser/.config/amass/config.ini
@@ -289,7 +299,7 @@
     backup=yes
     owner="{{ myuser }}" group="{{ myuser }}" mode=0400
   when:
-    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"] or inventory_hostname in groups["laptops"]
+    inventory_hostname in groups["kali"] or inventory_hostname in groups["axiom"]
 
 - name: Create .restic directory
   file: path="/home/{{ myuser }}/.restic" state=directory owner="{{ myuser }}" group="{{ myuser }}" mode=0700
