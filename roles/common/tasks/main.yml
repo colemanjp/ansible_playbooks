@@ -14,9 +14,7 @@
     - sendmail-cf
     - sendmail-doc
     - opendkim
-    - cyrus-sasl-plain
     - bind-chroot
-    - git
     - mutt
     - msmtp
     - nmap
@@ -31,8 +29,6 @@
     - libtool
     - readline-devel 
     - sqlite-devel 
-    - zlib-devel 
-    - glibc-headers 
     - glibc-devel 
     - libyaml-devel 
     - libicu-devel
@@ -40,7 +36,6 @@
     - stow
     - sysstat
     - masscan
-    - dnf-plugin-system-upgrade
     - aspell-en
     - openldap-devel
     - zsh
@@ -49,23 +44,18 @@
     - libxslt-devel
     - libxml++-devel
     - freetype-devel
-    - libjpeg-devel
     - gtk+-devel
     - gtk3-devel
     - gtk2-devel
     - vte-devel
-    - tmux
     - fping
     - hydra
     - fpdns
     - xsel
     - net-snmp-utils
-    - openvpn
     - ruby
-    - letsencrypt
     - python3-impacket
     - python3-certbot-nginx
-    - python-virtualenv
     - python3-selenium
     - rdesktop
     - fail2ban
@@ -77,28 +67,21 @@
     - finger
     - moreutils
     - ShellCheck
-    - nfs-utils
     - zmap
     - rust
     - cargo 
-    - xorg-x11-xauth
-    - awscli
+    - awscli2
     - dnsx
     - subfinder
     - ngrep
     - wireshark-cli
     - speedtest-cli
-    - at
     - telnet
-    - distribution-gpg-keys
     - kitty 
-    - zstd
     - fish
     - btop
     - mc
     - neovim
-    - net-tools
-    - lsof
     - s-nail
     - abduco
     - dvtm
@@ -193,7 +176,7 @@
     - ansible_distribution == 'Fedora'
     - item in (getent_group | default({}))
 
-- name: Set authorized key for {{ myuser }} copying it from current user
+- name: "Set authorized key for {{ myuser }} copying it from current user"
   ansible.posix.authorized_key:
     user: "{{ myuser }}"
     state: present

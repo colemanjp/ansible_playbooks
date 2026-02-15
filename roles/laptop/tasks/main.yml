@@ -21,28 +21,6 @@
     enabled: 1
   when: ansible_distribution == 'Fedora'
 
-- name: Add Teams Repo (disabled)
-  become: yes
-  yum_repository:
-    name: teams
-    description: teams
-    baseurl: https://packages.microsoft.com/yumrepos/ms-teams
-    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-    gpgcheck: 1
-    enabled: 0
-  when: ansible_distribution == 'Fedora'
-
-- name: Add Vscode Repo
-  become: yes
-  yum_repository:
-    name: code
-    description: Visual Studio Code
-    baseurl: https://packages.microsoft.com/yumrepos/vscode
-    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-    gpgcheck: 1
-    enabled: 1
-  when: ansible_distribution == 'Fedora'
-
 - name: Add Dropbox Repo
   become: yes
   yum_repository:
@@ -65,29 +43,6 @@
     enabled: 1
   when: ansible_distribution == 'Fedora'
 
-- name: Add Slack Repo (disabled)
-  become: yes
-  yum_repository:
-    name: slack
-    description: slack
-    baseurl: https://packagecloud.io/slacktechnologies/slack/fedora/36/x86_64
-    gpgkey: https://slack.com/gpg/slack_pubkey_20210901.gpg
-    gpgcheck: 1
-    enabled: 0
-    sslverify: 1
-  when: ansible_distribution == 'Fedora'
-
-- name: Add Jenkins Repo (disabled)
-  become: yes
-  yum_repository:
-    name: jenkins
-    description: jenkins
-    baseurl: http://pkg.jenkins.io/redhat
-    gpgkey: https://pkg.jenkins.io/redhat/jenkins.io.key
-    gpgcheck: 1
-    enabled: 0
-  when: ansible_distribution == 'Fedora'
-
 - name: Add Docker Repo
   become: yes
   yum_repository:
@@ -99,26 +54,6 @@
     enabled: 1
   when: ansible_distribution == 'Fedora'
 
-- name: Add Vagrant Repo
-  yum_repository:
-    name: hashicorp
-    description: Hashicorp Stable - $basearch
-    baseurl: https://rpm.releases.hashicorp.com/fedora/$releasever/$basearch/stable
-    gpgkey: https://rpm.releases.hashicorp.com/gpg
-    gpgcheck: 1
-    enabled: 1
-  when: ansible_distribution == 'Fedora'
-
-- name: Add Brave Repo (disabled)
-  yum_repository:
-    name: brave-browser
-    description: Brave Browser
-    baseurl: https://brave-browser-rpm-release.s3.brave.com/$basearch
-    gpgkey: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-    gpgcheck: 1
-    enabled: 0
-  when: ansible_distribution == 'Fedora'
-
 - name: Install laptop packages
   become: yes
   dnf: 
@@ -128,76 +63,35 @@
     - syncthing
     - gimp
     - remmina
-    - awesome-vim-colorschemes
     - Zim
     - recoll
     - fzf
-    - vim-X11
     - gnome-tweaks
-    - dnf-utils
     - google-chrome-stable
     - nautilus-dropbox
-    - ike-scan
     - xsel
-    - shutter
     - transmission
     - leafpad
-    - cronie-anacron
-    - jq
     - unrtf
-    - antiword
     - tesseract
     - keychain
     - proxychains-ng
     - torbrowser-launcher
     - firewall-config
     - ewftools
-    - evtest
-    - python-xdot
     - gparted
     - dconf-editor
-    - timew
     - seahorse
     - sleuthkit
     - libreoffice
     - whereami
     - geoclue2-demos 
-    - qt
-    - d-feet
-    - qqc2-desktop-style
     - okular
     - texstudio
-    - texlive-overpic
-    - texlive-cheatsheet
-    - texlive-libertine
-    - texlive-bigfoot
-    - texlive-mdframed
-    - texlive-fontawesome
-    - texlive-labels
-    - texlive-bizcard
-    - texlive-tufte-latex
-    - texlive-hardwrap
-    - texlive-roboto
-    - texlive-detex
-    - texlive-fontawesome5
-    - texlive-sourcesanspro
-    - texlive-tcolorbox
-    - texlive-tikzfill
-    - texlive-todonotes
-    - texlive-classicthesis
-    - texlive-pagella-otf
-    - texlive-framed
-    - texlive-metalogo
-    - texlive-titling
-    - texlive-tikz-kalender
-    - texlive-tex-gyre
-    - texlive-datetime
     - latexmk
     - zathura
     - zathura-plugins-all
     - adobe-source-sans-pro-fonts
-    - mozilla-fira-sans-fonts
-    - mozilla-fira-mono-fonts
     - lshw
     - clamav
     - clamav-update
@@ -205,220 +99,80 @@
     - openldap-clients
     - cheat 
     - cheat-bash-completion
-    - gtimelog
     - miller
-    - dump1090
-    - xrandr
     - httrack
     - zmap
     - masscan
     - pavucontrol
     - netcat
-    - wireless-tools
-    - power-profiles-daemon
     - aws-tools
-    - awscli
     - par
-    - gnome-sound-recorder
-    - vagrant
-    - xdotool
     - gnome-extensions-app
     - banner
     - hashcat
-    - arc-theme
     - thunderbird
     - golang-bin
-    - ncurses-devel
-    - rtl-sdr-devel
-    - p7zip
     - wireshark
-    - krita
     - aspell
     - krb5-workstation
-    - livecd-iso-to-mediums
-    - dmenu 
-    - xbacklight 
-    - feh 
     - sslscan
-    - pandoc
     - darktable
-    - perl-Archive-Zip
-    - virt-install
-    - libvirt-daemon-config-network
-    - libvirt-daemon-kvm
-    - qemu-kvm
-    - virt-manager
-    - virt-viewer
-    - libguestfs-tools
-    - guestfs-tools
-    - python3-libguestfs
-    - virt-top
-    - NetworkManager-tui
     - kleopatra
     - onesixtyone
-    - clearlooks-compact-gnome-theme
-    - gnome-shell-extension-user-theme
-    - sassc
-    - pinta
-    - gthumb
-    - xsane
-    - pulseeffects
     - ripgrep
-    - nbtscan
-    - rust-libdbus-sys-devel
-    - wxGTK-devel
     - docker-ce 
     - docker-ce-cli 
     - containerd.io 
     - docker-buildx-plugin 
     - docker-compose-plugin
     - pass
-    - qrencode
-    - wl-clipboard
     - xclip
-    - hdparm
-    - kubernetes-client
-    - helm
     - pdfgrep
     - htop
     - gnome-pomodoro
     - libpst
-    - zeal
     - recoll-gssp
     - GeoIP
     - python3-notebook
-    - python3-idle
-    - python3-spyder
-    - lftp
-    - filezilla
     - ckermit
     - geeqie
     - rawtherapee
     - digikam
     - argyllcms
-    - libXxf86vm-devel
-    - terraform
-    - mu
-    - konsole 
-    - blackbox-terminal
-    - foot
     - ddrescue
-    - python3-qt5-webengine
-    - pcsc-tools
     - sigil
-    - buku
     - md5deep
-    - nodejs-npm
-    - v4l-utils
-    - xournalpp
-    - kcm_wacomtablet
     - unetbootin
-    - iotop
-    - alacritty
     - fd-find
     - tlp
     - imhex
-    - kdissert
-    - vym
-    - minder
-    - merkaartor
     - ranger
-    - libxcrypt-compat
     - mpv
-    - gtk4-devel
-    - zig
-    - libadwaita-devel
-    - xpad
-    - ptyxis
     - bat
-    - libappindicator
     - gnome-shell-extension-gpaste
     - yubikey-manager
     - yubikey-manager-qt
     - qpdf
     - ffuf
     - restic
-    - vivaldi
     - hardinfo2
-    - code
     - xmlstarlet
-    - glow
-    - pdftk-java
-    - openbao
     - ncdu
+    - VirtualBox-7.2
+    - vivaldi
+    - texlive-tikz-kalender
+    - texlive-tex-gyre
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
 
-- name: Install keybase key 
-  become: yes
-  rpm_key:
-    key: https://keybase.io/docs/server_security/code_signing_key.asc
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-  #- name: Install keybase
-  #become: yes
-  #dnf: 
-  #  name: https://prerelease.keybase.io/keybase_amd64.rpm
-  #  state: installed
-  #when: ansible_distribution == 'Fedora'
-
-- name: Remove laptop packages
-  become: yes
-  dnf:
-    name:
-    - '@xfce-desktop-environment'
-    - xfce4-whiskermenu-plugin
-    - libxfce4util
-    - libxfce4ui
-    - xfce-polkit
-    - im-chooser-xfce
-    - xfce4-settings
-    - imsettings-xfce
-    - podman-docker
-    - gnome-shell-extension-unite
-    - gnome-shell-extension-pop-shell
-    - i3
-    - i3status
-    - i3lock
-    - xmonad
-    - vim-powerline
-    - tmux-powerline
-    - slack
-    - xournal
-    - jenkins
-    - nodejs-aw-webui
-    - python3-aw-client
-    - python3-aw-core.noarch
-    - python3-aw-qt
-    - cabal-install
-    - ghc-unliftio-core-devel
-    - ghc-unliftio-core
-    - ghc-pcre-light-devel
-    - teams
-    - brave-browser
-    - brave-keyring
-    - helix
-    - xsane-gimp
-    - java-1.8.0-openjdk
-    - java-1.8.0-openjdk-devel
-    - task
-    - vit
-    - tasksh
-    - taskd
-    - devilspie2
-    - deja-dup
-    - hugo
-    - playonlinux
-    - gcc-go
-    - conky
-    - python-epub
-    - python3-csvkit
-    - retext
-    autoremove: yes
-    state: absent
-  when: ansible_distribution == 'Fedora'
+#- name: Remove laptop packages
+#  become: yes
+#  dnf:
+#    name:
+#    autoremove: yes
+#    state: absent
+#  when: ansible_distribution == 'Fedora'
 
 - name: Install multiple tools with go install
   become_user: "{{ myuser }}"
@@ -432,15 +186,15 @@
   loop_control:
     label: "{{ item.split('/')[2] }}"
 
-#- name: "Install logseq flatpak for {{ myuser }}"
-#  become: yes
-#  become_user: "{{ myuser }}"
-#  flatpak:
-#    name: com.logseq.Logseq
-#    method: user
-#    remote: flathub
-#    state: present
-#  when: ansible_distribution == 'Fedora'
+- name: "Add flathub repo for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak_remote:
+    name: flathub
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
+    state: present
+  when: ansible_distribution == 'Fedora'
 
 - name: "Install spotify flatpak for {{ myuser }}"
   become: yes
@@ -472,6 +226,16 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
+- name: "Install xmind flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: net.xmind.XMind
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora'
+
 - name: "Enable service syncthing@{{ myuser }} and start it"
   ansible.builtin.service:
     name: "syncthing@{{ myuser }}"
@@ -479,12 +243,21 @@
     state: started
   when: ansible_distribution == 'Fedora'
 
-- name: "Add {{ myuser }} to multiple groups"
+- name: Gather existing groups
+  ansible.builtin.getent:
+    database: group
+  when: ansible_distribution == 'Fedora'
+
+- name: "Add {{ myuser }} to existing groups"
   ansible.builtin.user:
     name: "{{ myuser }}"
-    groups: vboxusers,docker,dialout
+    groups: "{{ item }}"
     append: yes
-  when: ansible_distribution == 'Fedora'
+  loop:
+    - vboxusers
+  when:
+    - ansible_distribution == 'Fedora'
+    - item in (getent_group | default({}))
 
 - name: Set udev rules for ledger
   template: src=etc/udev/rules.d/20-ledger.rules
