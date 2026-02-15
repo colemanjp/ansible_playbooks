@@ -1,17 +1,23 @@
 # Managed by ansible
-.cache
-.Cache
 cache
 Cache
 CacheStorage
 Code Cache
+$HOME/Downloads
+VirtualBox\ VMs/nobackup
+vmware/nobackup
+Trash
+.cache
+.Cache
 .config/Microsoft
 .config/Slack
 .config/vivaldi
+.config/vivaldi-snapshot
 .Crashplan
 .dropbox
 .dropbox-dist
 .local/share/containers/storage/overlay
+.local/share/digikam
 .local/share/docker/fuse-overlayfs
 .local/share/docker/overlay2
 .local/share/docker/volumes
@@ -20,7 +26,3 @@ Code Cache
 .zoom
 *.iso
 *.ova
-$HOME/Downloads
-VirtualBox\ VMs/nobackup
-vmware/nobackup
-Trash
