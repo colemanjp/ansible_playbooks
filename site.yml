@@ -8,8 +8,8 @@
     - laptop
     - logwatch
     - cron
-    - sendmail
     - firewalld
+    - sendmail
 
 - hosts: vps
   roles:
