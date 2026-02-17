@@ -9,6 +9,7 @@ vmware/nobackup
 Trash
 .cache
 .Cache
+.caltrash
 .config/Microsoft
 .config/Slack
 .config/vivaldi
