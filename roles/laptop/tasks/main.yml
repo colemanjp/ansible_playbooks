@@ -162,17 +162,19 @@
     - vivaldi
     - texlive-tikz-kalender
     - texlive-tex-gyre
+    - rclone
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
 
-#- name: Remove laptop packages
-#  become: yes
-#  dnf:
-#    name:
-#    autoremove: yes
-#    state: absent
-#  when: ansible_distribution == 'Fedora'
+- name: Remove laptop packages
+  become: yes
+  dnf:
+    name:
+    - ollama
+    autoremove: yes
+    state: absent
+  when: ansible_distribution == 'Fedora'
 
 - name: Install multiple tools with go install
   become_user: "{{ myuser }}"
