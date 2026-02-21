@@ -1,4 +1,5 @@
 # Managed by ansible
+BurpSuitePro
 cache
 Cache
 CacheStorage
