@@ -159,7 +159,7 @@
     - xmlstarlet
     - ncdu
     - VirtualBox-7.2
-    - vivaldi
+    - vivaldi-stable
     - texlive-tikz-kalender
     - texlive-tex-gyre
     - rclone
@@ -172,6 +172,10 @@
   dnf:
     name:
     - ollama
+    - displaycal
+    - gammastep
+    - gammastep-indicator
+    - vivaldi-snapshot
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
