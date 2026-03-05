@@ -4,6 +4,7 @@ cache
 Cache
 CacheStorage
 Code Cache
+gowitness
 $HOME/Downloads
 VirtualBox\ VMs/nobackup
 vmware/nobackup
@@ -23,6 +24,7 @@ Trash
 .local/share/docker/fuse-overlayfs
 .local/share/docker/overlay2
 .local/share/docker/volumes
+.local/share/docker/containerd
 .local/share/flatpak
 .recoll
 .zoom
