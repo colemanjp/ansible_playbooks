@@ -163,6 +163,7 @@
     - texlive-tikz-kalender
     - texlive-tex-gyre
     - rclone
+    - vlc
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
@@ -212,14 +213,14 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
-- name: "Install VLC flatpak for {{ myuser }}"
+- name: "Remove VLC flatpak for {{ myuser }}"
   become: yes
   become_user: "{{ myuser }}"
   flatpak:
     name: org.videolan.VLC
     method: user
     remote: flathub
-    state: present
+    state: absent
   when: ansible_distribution == 'Fedora'
 
 - name: "Install discord  flatpak for {{ myuser }}"
