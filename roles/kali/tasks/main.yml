@@ -154,6 +154,7 @@
         - getallurls
         - keepass2
         - maven
+        - trufflehog
     state: present
   when: ansible_distribution == 'Kali'
 
