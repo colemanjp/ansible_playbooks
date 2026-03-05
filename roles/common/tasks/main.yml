@@ -130,6 +130,7 @@
     - kitty
     - neovim
     - age
+    - stow
     state: present
   when: ansible_distribution == 'Debian'
 
