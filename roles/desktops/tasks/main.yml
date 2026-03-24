@@ -50,6 +50,7 @@
   become: true
   loop:
     - github.com/sensepost/gowitness@latest
+    - github.com/mark3labs/mcphost@latest
   shell: go install {{ item }}
   when: ansible_distribution == 'Debian'
   loop_control:
