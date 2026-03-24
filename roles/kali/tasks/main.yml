@@ -155,6 +155,8 @@
         - keepass2
         - maven
         - trufflehog
+        - python3-undetected-chromedriver
+        - iputils-ping
     state: present
   when: ansible_distribution == 'Kali'
 
