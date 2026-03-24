@@ -163,7 +163,8 @@
     - texlive-tikz-kalender
     - texlive-tex-gyre
     - rclone
-    - vlc
+    - libheif-tools
+    - celluloid
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
@@ -177,6 +178,7 @@
     - gammastep
     - gammastep-indicator
     - vivaldi-snapshot
+    - vlc
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
@@ -213,14 +215,14 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
-- name: "Remove VLC flatpak for {{ myuser }}"
+- name: "Install VLC flatpak for {{ myuser }}"
   become: yes
   become_user: "{{ myuser }}"
   flatpak:
     name: org.videolan.VLC
     method: user
     remote: flathub
-    state: absent
+    state: present
   when: ansible_distribution == 'Fedora'
 
 - name: "Install discord  flatpak for {{ myuser }}"
