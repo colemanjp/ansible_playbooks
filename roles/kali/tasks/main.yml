@@ -157,6 +157,7 @@
         - trufflehog
         - python3-undetected-chromedriver
         - iputils-ping
+        - pdf-parser
     state: present
   when: ansible_distribution == 'Kali'
 
