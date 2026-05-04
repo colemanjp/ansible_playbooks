@@ -119,7 +119,6 @@
     - darktable
     - kleopatra
     - onesixtyone
-    - ripgrep
     - docker-ce 
     - docker-ce-cli 
     - containerd.io 
