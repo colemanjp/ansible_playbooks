@@ -165,6 +165,13 @@
     - rclone
     - libheif-tools
     - celluloid
+    - lagrange
+    - pdftk-java
+    - rpi-imager
+    - xxd
+    - dvdbackup
+    - wlr-randr
+    - mupdf
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
@@ -220,6 +227,16 @@
   become_user: "{{ myuser }}"
   flatpak:
     name: org.videolan.VLC
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora'
+
+- name: "Install MakeMKV flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: com.makemkv.MakeMKV
     method: user
     remote: flathub
     state: present
