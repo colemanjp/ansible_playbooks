@@ -1,3 +1,15 @@
+- name: Add GitHub CLI Repo
+  become: yes
+  yum_repository:
+    name: gh-cli
+    description: GitHub CLI
+    baseurl: https://cli.github.com/packages/rpm
+    gpgkey: https://cli.github.com/packages/githubcli-archive-keyring.asc
+    gpgcheck: 1
+    repo_gpgcheck: 1
+    enabled: 1
+  when: ansible_distribution == 'Fedora'
+
 - name: Add Vivaldi Repo
   become: yes
   yum_repository:
@@ -171,6 +183,7 @@
     - dvdbackup
     - wlr-randr
     - mupdf
+    - gh
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
