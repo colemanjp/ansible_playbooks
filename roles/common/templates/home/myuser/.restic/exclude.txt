@@ -6,6 +6,8 @@ CacheStorage
 Code Cache
 gowitness
 $HOME/Downloads
+$HOME/go
+$HOME/.var
 VirtualBox\ VMs/nobackup
 vmware/nobackup
 Trash
