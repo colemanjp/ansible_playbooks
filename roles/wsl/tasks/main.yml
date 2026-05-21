@@ -20,14 +20,6 @@
           - 7zip
           - unzip
           - usbutils
-        state: present
-      when: ansible_facts['distribution'] == 'Kali' and ansible_facts['virtualization_type'] in ['wsl', 'container']
-    - name: "Kali WSL Uninstall Packages"
-      become: true
-      ansible.builtin.apt:
-        update_cache: true
-        cache_valid_time: 86400 # 1 day
-        name:
           - neovim
-        state: absent
+        state: present
       when: ansible_facts['distribution'] == 'Kali' and ansible_facts['virtualization_type'] in ['wsl', 'container']
