@@ -1,6 +1,9 @@
 ---
 - hosts: localhost
   tasks:
+#    - name: Debug facts
+#      ansible.builtin.debug:
+#        msg: "distro={{ ansible_facts['distribution'] }} virt={{ ansible_facts['virtualization_type'] }}"
     - name: "Kali WSL Install Packages"
       become: true
       ansible.builtin.apt:
@@ -18,7 +21,7 @@
           - unzip
           - usbutils
         state: present
-      when: ansible_distribution == 'Kali' and ansible_virtualization_type == 'wsl'
+      when: ansible_facts['distribution'] == 'Kali' and ansible_facts['virtualization_type'] in ['wsl', 'container']
     - name: "Kali WSL Uninstall Packages"
       become: true
       ansible.builtin.apt:
@@ -27,4 +30,4 @@
         name:
           - neovim
         state: absent
-      when: ansible_distribution == 'Kali' and ansible_virtualization_type == 'wsl'
+      when: ansible_facts['distribution'] == 'Kali' and ansible_facts['virtualization_type'] in ['wsl', 'container']
