@@ -89,6 +89,8 @@
     - jetbrains-mono-fonts-all
     - age
     - ripgrep
+    - jq
+    - whois
     state: installed
   when: ansible_distribution == 'Fedora'
 
