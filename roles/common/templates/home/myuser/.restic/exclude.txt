@@ -20,6 +20,7 @@ Trash
 .config/vivaldi-snapshot
 .Crashplan
 .dropbox
+.dropbox.cache
 .dropbox-dist
 .local/share/containers/storage/overlay
 .local/share/digikam
