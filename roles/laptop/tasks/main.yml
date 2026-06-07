@@ -184,6 +184,7 @@
     - wlr-randr
     - mupdf
     - gh
+    - alacritty
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
