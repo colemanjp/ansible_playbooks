@@ -31,6 +31,9 @@
         - dmidecode
         - python3-venv
         - libfuse2t64
+        - rsync
+        - node-js-beautify
+        - bind9-dnsutils
     state: present
   when: ansible_distribution == 'Debian'
 
