@@ -21,5 +21,6 @@
           - unzip
           - usbutils
           - neovim
+          - ripgrep
         state: present
       when: ansible_facts['distribution'] == 'Kali' and ansible_facts['virtualization_type'] in ['wsl', 'container']
