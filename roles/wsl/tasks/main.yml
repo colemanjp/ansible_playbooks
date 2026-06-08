@@ -24,3 +24,16 @@
           - ripgrep
         state: present
       when: ansible_facts['distribution'] == 'Kali' and ansible_facts['virtualization_type'] in ['wsl', 'container']
+    
+    - name: "Fedora WSL Install Packages"
+      become: true
+      ansible.builtin.dnf:
+        update_cache: true
+        name:
+          - restic
+          - stow
+          - neovim
+          - ripgrep
+          - gh
+        state: present
+      when: ansible_facts['distribution'] == 'Fedora' and ansible_facts['virtualization_type'] in ['wsl', 'container']
