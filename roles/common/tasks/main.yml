@@ -135,6 +135,7 @@
     - age
     - stow
     - tree
+    - shellcheck
     state: present
   when: ansible_distribution == 'Debian'
 
