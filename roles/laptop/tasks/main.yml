@@ -296,6 +296,13 @@
     state: started
   when: ansible_distribution == 'Fedora'
 
+- name: "Enable service input-remapper and start it"
+  ansible.builtin.service:
+    name: "input-remapper"
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Fedora'
+
 - name: Gather existing groups
   ansible.builtin.getent:
     database: group
