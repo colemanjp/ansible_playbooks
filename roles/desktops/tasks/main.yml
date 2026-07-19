@@ -35,6 +35,8 @@
         - node-js-beautify
         - bind9-dnsutils
         - npm
+        - openjdk-21-jre-headless
+        - btop
     state: present
   when: ansible_distribution == 'Debian'
 
