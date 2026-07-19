@@ -158,6 +158,7 @@
         - python3-undetected-chromedriver
         - iputils-ping
         - pdf-parser
+        - node-playwright
     state: present
   when: ansible_distribution == 'Kali'
 
