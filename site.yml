@@ -46,3 +46,4 @@
   roles:
     - common
     - desktops
+    - pbs

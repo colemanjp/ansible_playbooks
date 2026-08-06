@@ -1,0 +1,41 @@
+- name: Install prerequisite packages
+  ansible.builtin.apt:
+    name:
+      - curl
+      - gnupg
+      - python3-debian
+    state: present
+  when: ansible_distribution == 'Debian'
+
+- name: Add Proxmox archive keyring
+  ansible.builtin.get_url:
+    url: https://enterprise.proxmox.com/debian/proxmox-archive-keyring-trixie.gpg
+    dest: /usr/share/keyrings/proxmox-archive-keyring.gpg
+    owner: root
+    group: root
+    mode: '0644'
+    checksum: sha256:136673be77aba35dcce385b28737689ad64fd785a797e57897589aed08db6e45
+  when: ansible_distribution == 'Debian'
+
+- name: Add PBS no-subscription repo (deb822)
+  ansible.builtin.deb822_repository:
+    name: proxmox
+    types: deb
+    uris: http://download.proxmox.com/debian/pbs
+    suites: "{{ ansible_distribution_release }}"
+    components: pbs-no-subscription
+    signed_by: /usr/share/keyrings/proxmox-archive-keyring.gpg
+    state: present
+  when: ansible_distribution == 'Debian'
+  register: pbs_repo
+
+- name: Update apt cache after adding PBS repo
+  ansible.builtin.apt:
+    update_cache: yes
+  when: ansible_distribution == 'Debian' and pbs_repo.changed
+
+- name: Install proxmox-backup-server
+  ansible.builtin.apt:
+    name: proxmox-backup-server
+    state: present
+  when: ansible_distribution == 'Debian'
