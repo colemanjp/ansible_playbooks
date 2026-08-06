@@ -6,8 +6,14 @@ CacheStorage
 Code Cache
 gowitness
 $HOME/Downloads
+$HOME/Dropbox/calibre_add
+$HOME/Dropbox/Calibre_Library
+$HOME/Dropbox/Videos
+$HOME/Dropbox/.dropbox.cache
+$HOME/Dropbox/.dropbox
 $HOME/go
 $HOME/.var
+torbrowser
 VirtualBox\ VMs/nobackup
 vmware/nobackup
 Trash
@@ -33,3 +39,4 @@ Trash
 .zoom
 *.iso
 *.ova
+*.mp4
