@@ -199,6 +199,7 @@
     - microsoft-edge-stable
     - input-remapper
     - evtest
+    - pulseaudio-qpaeq
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
