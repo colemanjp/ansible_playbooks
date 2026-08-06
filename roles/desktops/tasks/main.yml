@@ -37,6 +37,8 @@
         - npm
         - openjdk-21-jre-headless
         - btop
+        - gparted
+        - systemd-timesyncd
     state: present
   when: ansible_distribution == 'Debian'
 
