@@ -80,6 +80,7 @@
 
 - name: Install laptop packages
   become: yes
+  ignore_errors: yes
   dnf: 
     name:
     - kernel-devel
@@ -199,7 +200,8 @@
     - microsoft-edge-stable
     - input-remapper
     - evtest
-    - pulseaudio-qpaeq
+    - pipewire-pulseaudio
+    - pulseaudio-utils
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
@@ -214,6 +216,8 @@
     - gammastep-indicator
     - vivaldi-snapshot
     - vlc
+    - pulseaudio-qpaeq
+    - pulseaudio
     autoremove: yes
     state: absent
   when: ansible_distribution == 'Fedora'
@@ -332,4 +336,13 @@
     dest=/etc/dnf/dnf.conf
     backup=yes
     owner=0 group=0 mode=0444
+  when: ansible_distribution == 'Fedora'
+
+- name: Ensure FQDN entry exists in /etc/hosts stops sendmail errors
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    backup: yes
+    regexp: '^127\.0\.1\.1'
+    line: "127.0.1.1\t{{ ansible_hostname }}.localdomain\t{{ ansible_hostname }}"
+    state: present
   when: ansible_distribution == 'Fedora'
