@@ -8,6 +8,7 @@ gowitness
 $HOME/Downloads
 $HOME/Dropbox/calibre_add
 $HOME/Dropbox/Calibre_Library
+$HOME/Dropbox/paperless-ngx
 $HOME/Dropbox/Videos
 $HOME/Dropbox/.dropbox.cache
 $HOME/Dropbox/.dropbox
