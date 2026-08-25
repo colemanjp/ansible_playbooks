@@ -1,0 +1,22 @@
+- name: Install Ubuntu packages
+  become: yes
+  apt: 
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+    - python3-gpg
+    - openssh-server
+    - keepassxc-full
+    - neovim
+    - libappindicator3-1
+    - calibre
+    - stow
+    - build-essential
+    state: present
+
+- name: Ubuntu enable service ssh and start it
+  ansible.builtin.service:
+    name: ssh
+    enabled: yes
+    state: started
+  when: ansible_facts['distribution'] == 'Ubuntu'

@@ -47,3 +47,7 @@
     - common
     - desktops
     - pbs
+
+- hosts: ubuntustudio
+  roles:
+    - ubuntu
