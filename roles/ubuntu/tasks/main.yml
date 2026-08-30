@@ -1,3 +1,17 @@
+- name: Add Vivaldi GPG key
+  ansible.builtin.get_url:
+    url: https://repo.vivaldi.com/archive/linux_signing_key.pub
+    dest: /usr/share/keyrings/vivaldi-archive-keyring.asc
+    mode: '0644'
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Add Vivaldi Repo
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/vivaldi-archive-keyring.asc] https://repo.vivaldi.com/archive/deb/ stable main"
+    filename: vivaldi
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
 - name: Install Ubuntu packages
   become: yes
   apt: 
@@ -12,7 +26,10 @@
     - calibre
     - stow
     - build-essential
+    - krdc
+    - vivaldi-stable
     state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
 
 - name: Ubuntu enable service ssh and start it
   ansible.builtin.service:
