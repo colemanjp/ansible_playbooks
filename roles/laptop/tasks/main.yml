@@ -321,6 +321,7 @@
     append: yes
   loop:
     - vboxusers
+    - dialout
   when:
     - ansible_distribution == 'Fedora'
     - item in (getent_group | default({}))
