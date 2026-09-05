@@ -28,6 +28,7 @@
     - build-essential
     - krdc
     - vivaldi-stable
+    - openvpn
     state: present
   when: ansible_facts['distribution'] == 'Ubuntu'
 
