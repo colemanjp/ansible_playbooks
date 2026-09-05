@@ -29,6 +29,7 @@
     - krdc
     - vivaldi-stable
     - openvpn
+    - net-tools
     state: present
   when: ansible_facts['distribution'] == 'Ubuntu'
 
