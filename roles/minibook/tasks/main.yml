@@ -48,5 +48,16 @@
     - nautilus-dropbox
     - python3-gpg
     - vivaldi
+    - "@kde-desktop-environment"
     state: installed
+  when: ansible_distribution == 'Fedora'
+
+- name: Remove minibook packages
+  become: yes
+  dnf:
+    name:
+    - "@lxqt-desktop"
+    - kanshi
+    - wlr-randr
+    state: absent
   when: ansible_distribution == 'Fedora'
