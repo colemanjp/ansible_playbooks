@@ -18,6 +18,7 @@ torbrowser
 VirtualBox\ VMs/nobackup
 vmware/nobackup
 Trash
+.BurpSuite
 .cache
 .Cache
 .caltrash
@@ -36,6 +37,7 @@ Trash
 .local/share/docker/volumes
 .local/share/docker/containerd
 .local/share/flatpak
+.npm
 .recoll
 .zoom
 *.iso
