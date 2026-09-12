@@ -30,12 +30,20 @@
     - vivaldi-stable
     - openvpn
     - net-tools
+    - syncthing
     state: present
   when: ansible_facts['distribution'] == 'Ubuntu'
 
 - name: Ubuntu enable service ssh and start it
   ansible.builtin.service:
     name: ssh
+    enabled: yes
+    state: started
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: "Ubuntu enable service syncthing@{{ myuser }} and start it"
+  ansible.builtin.service:
+    name: "syncthing@{{ myuser }}"
     enabled: yes
     state: started
   when: ansible_facts['distribution'] == 'Ubuntu'
