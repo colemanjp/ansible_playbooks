@@ -31,6 +31,8 @@
     - openvpn
     - net-tools
     - syncthing
+    - input-remapper-gtk
+    - evtest
     state: present
   when: ansible_facts['distribution'] == 'Ubuntu'
 
