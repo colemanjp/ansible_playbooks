@@ -50,6 +50,7 @@
     name:
         - tightvncserver
         - wayvnc
+        - gtk-input-remapper
     state: absent
   when: ansible_distribution == 'Debian'
 
