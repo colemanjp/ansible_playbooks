@@ -144,7 +144,6 @@
     update_cache: yes
     cache_valid_time: 86400 #1 day
     name:
-        - ansible
     state: absent
   when: ansible_distribution == 'Debian'
 
