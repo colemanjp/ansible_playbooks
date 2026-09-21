@@ -1,3 +1,25 @@
+- name: Ensure /etc/apt/keyrings exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Download Docker GPG key
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    dest: /etc/apt/keyrings/docker.asc
+    mode: "0644"
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Add Docker repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch={{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    filename: docker
+    state: present
+    update_cache: yes
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
 - name: Add Vivaldi GPG key
   ansible.builtin.get_url:
     url: https://repo.vivaldi.com/archive/linux_signing_key.pub
@@ -32,6 +54,23 @@
     - syncthing
     - input-remapper-gtk
     - evtest
+    - uidmap
+    - ncdu
+    - fzf
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: Install Docker packages from docker.com
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400 #1 day
+    name:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
     state: present
   when: ansible_facts['distribution'] == 'Ubuntu'
 
