@@ -159,6 +159,7 @@
         - iputils-ping
         - pdf-parser
         - node-playwright
+        - httpx-toolkit
     state: present
   when: ansible_distribution == 'Kali'
 
