@@ -295,6 +295,16 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
+- name: "Install Collabora Office flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: com.collaboraoffice.Office
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora'
+
 - name: "Enable service syncthing@{{ myuser }} and start it"
   ansible.builtin.service:
     name: "syncthing@{{ myuser }}"
