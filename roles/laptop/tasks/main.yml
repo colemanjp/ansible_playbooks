@@ -203,6 +203,10 @@
     - evtest
     - pipewire-pulseaudio
     - pulseaudio-utils
+    - unison
+    - unison-gtk
+    - qt
+    - xlsclients
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
