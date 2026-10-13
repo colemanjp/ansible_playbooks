@@ -88,6 +88,12 @@
     state: absent
   when: ansible_facts['distribution'] == 'Ubuntu'
 
+- name: "Install xmind snap"
+  community.general.snap:
+    name: xmind
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
 - name: Gather existing groups
   ansible.builtin.getent:
     database: group
