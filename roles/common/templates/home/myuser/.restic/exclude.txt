@@ -30,6 +30,7 @@ Trash
 .dropbox
 .dropbox.cache
 .dropbox-dist
+.local/share/baloo
 .local/share/containers/storage/overlay
 .local/share/digikam
 .local/share/docker/fuse-overlayfs
@@ -37,6 +38,7 @@ Trash
 .local/share/docker/volumes
 .local/share/docker/containerd
 .local/share/flatpak
+.local/share/fonts
 .npm
 .recoll
 .zoom
