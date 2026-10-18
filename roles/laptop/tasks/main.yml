@@ -207,6 +207,7 @@
     - unison-gtk
     - qt
     - xlsclients
+    - francis
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
