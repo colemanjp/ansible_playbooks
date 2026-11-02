@@ -208,6 +208,10 @@
     - qt
     - xlsclients
     - francis
+    - zig
+    - libadwaita-devel
+    - gtk4-layer-shell-devel
+    - minisign
     state: installed
     disable_excludes: main
   when: ansible_distribution == 'Fedora'
