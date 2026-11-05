@@ -314,6 +314,16 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
+- name: "Install koreader flatpak for {{ myuser }}"
+  become: yes
+  become_user: "{{ myuser }}"
+  flatpak:
+    name: rocks.koreader.KOReader
+    method: user
+    remote: flathub
+    state: present
+  when: ansible_distribution == 'Fedora'
+
 - name: "Enable service syncthing@{{ myuser }} and start it"
   ansible.builtin.service:
     name: "syncthing@{{ myuser }}"
