@@ -186,6 +186,7 @@
     - vivaldi-stable
     - texlive-tikz-kalender
     - texlive-tex-gyre
+    - texlive-enumitem
     - rclone
     - libheif-tools
     - celluloid
