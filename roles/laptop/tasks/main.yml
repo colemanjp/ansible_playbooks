@@ -255,75 +255,25 @@
     state: present
   when: ansible_distribution == 'Fedora'
 
-- name: "Install spotify flatpak for {{ myuser }}"
+- name: "Install flatpaks for {{ myuser }}"
   become: yes
   become_user: "{{ myuser }}"
   flatpak:
-    name: com.spotify.Client
+    name: "{{ item.id }}"
     method: user
     remote: flathub
     state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install VLC flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: org.videolan.VLC
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install MakeMKV flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: com.makemkv.MakeMKV
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install discord  flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: com.discordapp.Discord
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install xmind flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: net.xmind.XMind
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install Collabora Office flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: com.collaboraoffice.Office
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
-
-- name: "Install koreader flatpak for {{ myuser }}"
-  become: yes
-  become_user: "{{ myuser }}"
-  flatpak:
-    name: rocks.koreader.KOReader
-    method: user
-    remote: flathub
-    state: present
-  when: ansible_distribution == 'Fedora'
+  loop:
+    - { id: com.spotify.Client, label: Spotify }
+    - { id: org.videolan.VLC, label: VLC }
+    - { id: com.makemkv.MakeMKV, label: MakeMKV }
+    - { id: com.discordapp.Discord, label: Discord }
+    - { id: net.xmind.XMind, label: XMind }
+    - { id: com.collaboraoffice.Office, label: Collabora Office }
+    - { id: rocks.koreader.KOReader, label: KOReader }
+  loop_control:
+    label: "{{ item.label }}"
+  when: ansible_facts['distribution'] == 'Fedora'
 
 - name: "Enable service syncthing@{{ myuser }} and start it"
   ansible.builtin.service:
